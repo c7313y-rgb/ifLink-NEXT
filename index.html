@@ -1,0 +1,2553 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ifLink NEXT｜共創DX人材育成OS — Premium Edition v2</title>
+<meta name="description" content="ifLink NEXT は IF-THEN モジュールで異業種をつなぐ共創DXプラットフォーム。カードホルダー / 共創ビルダー / マーケット / メンター / 分析レポートを統合。" />
+<style>
+/* =========================================================
+   ifLink NEXT — Premium Edition
+   Silver × Blue Metallic / Glassmorphism / Micro-animation
+   ========================================================= */
+:root{
+  --bg:#dde6ee;
+  --panel:rgba(248,251,255,.74);
+  --panel-strong:rgba(255,255,255,.88);
+  --metal1:#fafdff;
+  --metal2:#aebfd0;
+  --metal3:#5d7388;
+  --blue:#0d7df0;
+  --blue-deep:#053a86;
+  --cyan:#13d6ff;
+  --cyan-soft:#7be8ff;
+  --navy:#06182d;
+  --navy-2:#0a2750;
+  --text:#08213c;
+  --muted:#566c83;
+  --line:rgba(0,93,160,.22);
+  --shadow-sm:0 8px 22px rgba(0,40,90,.10);
+  --shadow:0 22px 60px rgba(0,35,80,.20);
+  --shadow-lg:0 30px 80px rgba(0,40,100,.28);
+  --glow:0 0 22px rgba(0,174,255,.55);
+  --glow-strong:0 0 38px rgba(0,212,255,.75);
+  --radius-sm:12px;
+  --radius:18px;
+  --radius-lg:24px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Meiryo","Segoe UI",sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(1200px 600px at 12% -10%,rgba(255,255,255,.95),transparent 55%),
+    radial-gradient(900px 500px at 90% 8%,rgba(74,176,255,.32),transparent 60%),
+    radial-gradient(800px 600px at 50% 110%,rgba(13,125,240,.18),transparent 60%),
+    linear-gradient(135deg,#f3f7fc 0%,#cfdce8 38%,#eef4f9 55%,#9dafc1 100%);
+  letter-spacing:.01em;
+}
+body:before{
+  content:"";position:fixed;inset:0;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 1px,transparent 1px 9px),
+    linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);
+  mix-blend-mode:screen;pointer-events:none;z-index:0;
+}
+button,input,textarea,select{font-family:inherit;color:inherit}
+a{color:var(--blue);text-decoration:none}
+
+/* ============== Layout ============== */
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh;position:relative;z-index:1}
+
+/* ============== Sidebar ============== */
+.sidebar{
+  position:sticky;top:0;height:100vh;
+  padding:18px 14px 22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(168,184,200,.62));
+  border-right:1px solid rgba(255,255,255,.85);
+  box-shadow:14px 0 42px rgba(0,36,72,.18);
+  backdrop-filter:blur(18px) saturate(1.2);
+  -webkit-backdrop-filter:blur(18px) saturate(1.2);
+  display:flex;flex-direction:column;
+  z-index:5;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:6px 6px 16px;border-bottom:1px solid rgba(0,80,160,.12);margin-bottom:14px}
+.brand-mark{
+  width:42px;height:42px;border-radius:13px;
+  background:linear-gradient(135deg,#0fb6f5,#0a48b6 60%,#031b3a);
+  display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;
+  box-shadow:var(--glow),inset 0 1px 0 rgba(255,255,255,.5);
+  position:relative;
+}
+.brand-mark:after{content:"";position:absolute;inset:3px;border-radius:11px;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 60%)}
+.brand-text b{font-size:17px;letter-spacing:.04em;color:#06294f;display:block;line-height:1}
+.brand-text small{display:block;font-size:10.5px;color:#33567c;margin-top:3px;font-weight:700;letter-spacing:.05em}
+.nav{display:grid;gap:6px}
+.nav button{
+  white-space:normal;line-height:1.25;
+  border:1px solid rgba(255,255,255,.85);
+  background:linear-gradient(180deg,#fbfeff 0%,#dbe5ee 50%,#f0f6fb 100%);
+  box-shadow:inset 0 1px 0 #fff,0 6px 16px rgba(0,42,92,.12);
+  border-radius:13px;padding:11px 12px 11px 38px;
+  color:#0a2647;font-weight:800;text-align:left;cursor:pointer;
+  position:relative;overflow:hidden;font-size:13.5px;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.nav button .ico{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  width:20px;height:20px;display:grid;place-items:center;
+  color:#0a5fb8;
+}
+.nav button:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,transparent,rgba(0,209,255,.28),transparent);
+  transform:translateX(-120%);
+}
+.nav button:hover{transform:translateX(2px)}
+.nav button:hover:before{animation:scan .8s}
+.nav button.active{
+  background:linear-gradient(180deg,#0d8ef7 0%,#0744a5 55%,#021a3a 100%);
+  color:#fff;
+  box-shadow:var(--glow),inset 0 0 18px rgba(255,255,255,.22);
+}
+.nav button.active .ico{color:#9ee9ff}
+@keyframes scan{to{transform:translateX(120%)}}
+.plan{
+  margin-top:auto;padding:14px;border-radius:18px;
+  background:linear-gradient(160deg,#03132a,#0566bf 75%,#01254e);
+  color:#fff;box-shadow:var(--glow);position:relative;overflow:hidden;
+}
+.plan:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% -10%,rgba(0,217,255,.55),transparent 55%);pointer-events:none}
+.plan b{font-size:14px;letter-spacing:.05em}
+.plan p{margin:6px 0 10px;font-size:12px;line-height:1.55;color:#cfeaff}
+.plan .metal-btn{
+  width:100%;padding:9px;border-radius:11px;border:1px solid rgba(255,255,255,.6);
+  background:linear-gradient(180deg,#fff,#bbcdde 50%,#f0f6fb);
+  font-weight:900;color:#022859;cursor:pointer;font-size:12.5px;
+  box-shadow:inset 0 1px 0 #fff;
+}
+
+/* ============== Main ============== */
+.main{padding:18px 22px 44px;min-width:0}
+.top{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:16px;flex-wrap:wrap;
+}
+.search{
+  flex:1;max-width:680px;min-width:260px;
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;border-radius:999px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:inset 0 1px 0 #fff,0 10px 28px rgba(0,42,88,.12);
+  backdrop-filter:blur(8px);
+}
+.search svg{width:18px;height:18px;color:#0a5fb8}
+.search input{border:0;background:transparent;outline:none;width:100%;font-weight:700;font-size:14px;color:#08213c}
+.search input::placeholder{color:#7c92a6;font-weight:600}
+.top-right{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(180deg,#fff,#cfdde9);
+  border:1px solid rgba(255,255,255,.9);
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,42,88,.12),inset 0 1px 0 #fff;
+  position:relative;
+}
+.icon-btn .badge-dot{position:absolute;top:7px;right:8px;width:9px;height:9px;border-radius:50%;background:linear-gradient(180deg,#ff6a6a,#c20f0f);box-shadow:0 0 8px rgba(255,80,80,.7)}
+.point{
+  padding:9px 16px;border-radius:14px;
+  background:linear-gradient(180deg,#06152a,#0a3878 80%,#04122a);color:#fff;
+  box-shadow:var(--glow);font-weight:900;font-size:13px;letter-spacing:.04em;
+  display:flex;align-items:center;gap:8px;
+}
+.point .lbl{font-size:10.5px;color:#9fdfff;letter-spacing:.1em}
+.user-chip{
+  display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;
+  background:linear-gradient(180deg,#fff,#d0dde9);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 8px 18px rgba(0,42,88,.12);font-weight:800;font-size:12.5px;cursor:pointer;
+}
+.user-chip img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+
+/* ============== Hero ============== */
+.hero{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;
+  min-height:300px;background:#001a33;
+  box-shadow:var(--shadow-lg);
+  border:1px solid rgba(255,255,255,.85);margin-bottom:18px;
+}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95}
+.hero .copy{
+  position:relative;z-index:1;padding:42px 46px;
+  background:linear-gradient(95deg,rgba(2,16,40,.85) 0%,rgba(0,72,135,.42) 45%,rgba(0,0,0,0) 75%);
+  color:#fff;min-height:300px;text-shadow:0 2px 14px rgba(0,0,0,.55);
+}
+.hero h1{font-size:36px;margin:0 0 14px;letter-spacing:.04em;line-height:1.25;font-weight:900}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#7befff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:15px;line-height:1.85;max-width:680px;margin:0;color:#dceaf5}
+.hero .actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.primary{
+  background:linear-gradient(180deg,#22e0ff,#0a73e6 50%,#02265b);color:#fff;
+  border:1px solid #cef6ff;border-radius:14px;padding:13px 24px;
+  font-weight:900;box-shadow:var(--glow);cursor:pointer;font-size:14px;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.primary:hover{transform:translateY(-2px);box-shadow:var(--glow-strong)}
+.secondary{
+  background:rgba(255,255,255,.14);color:#fff;
+  border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:13px 24px;
+  font-weight:900;cursor:pointer;font-size:14px;backdrop-filter:blur(6px);
+  transition:transform .18s ease,background .18s ease;
+}
+.secondary:hover{transform:translateY(-2px);background:rgba(255,255,255,.22)}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hero-tags span{
+  padding:5px 11px;border-radius:999px;font-size:11.5px;font-weight:800;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);
+  color:#e8f6ff;backdrop-filter:blur(4px);
+}
+
+/* ============== Stats ============== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat{
+  position:relative;padding:18px 16px;border-radius:18px;
+  background:var(--panel-strong);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 30px rgba(0,42,92,.12),inset 0 1px 0 #fff;
+  overflow:hidden;
+}
+.stat:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent,rgba(0,217,255,.12),transparent);
+  transform:translateX(-110%);
+}
+.stat:hover:before{animation:scan 1s}
+.stat .lbl{font-size:11.5px;color:var(--muted);font-weight:800;letter-spacing:.08em}
+.stat b{font-size:30px;color:#053884;display:block;margin-top:4px;font-weight:900;letter-spacing:.02em}
+.stat .delta{font-size:11.5px;font-weight:800;color:#0aa15a;margin-top:2px;display:inline-flex;align-items:center;gap:3px}
+.stat .delta.down{color:#d0492a}
+.stat .ico-bg{position:absolute;right:12px;top:14px;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(180deg,#e8f3ff,#b6cee3);color:#0666c4}
+
+/* ============== Sections ============== */
+.section{display:none;animation:fadeUp .35s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 2px 14px;flex-wrap:wrap}
+.section-head h2{margin:0;font-size:21px;letter-spacing:.04em;color:#072345;font-weight:900;display:flex;align-items:center;gap:10px}
+.section-head h2 .pill-tag{font-size:10.5px;padding:3px 9px;border-radius:999px;background:linear-gradient(180deg,#13d6ff,#0a73e6);color:#fff;letter-spacing:.08em}
+.section-head .desc{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+
+/* ============== Panel ============== */
+.panel{
+  border-radius:var(--radius-lg);
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:var(--shadow);
+  padding:20px;margin-bottom:18px;
+  backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+}
+.panel:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 35%);
+  pointer-events:none;border-radius:inherit;
+}
+.panel h3.title{margin:0 0 10px;font-size:16px;color:#06294e;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+
+/* ============== Grids ============== */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:16px;align-items:stretch}
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+
+/* ============== Card ============== */
+.card{
+  position:relative;border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(208,221,233,.72));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 30px rgba(0,40,80,.14),inset 0 1px 0 #fff;
+  overflow:hidden;transition:transform .22s ease,box-shadow .22s ease;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--glow),0 22px 44px rgba(0,40,80,.22)}
+.card.selected{outline:3px solid var(--cyan);box-shadow:var(--glow-strong)}
+.card .img-wrap{position:relative;overflow:hidden}
+.card img{width:100%;height:170px;object-fit:cover;display:block;transition:transform .55s ease;background:linear-gradient(135deg,#d9e5ef,#8198ac)}
+.card:hover img{transform:scale(1.05)}
+.card .img-wrap:after{
+  content:"";position:absolute;inset:auto 0 0 0;height:55%;
+  background:linear-gradient(0deg,rgba(0,20,40,.55),transparent);pointer-events:none;
+}
+.card .id-tag{
+  position:absolute;left:10px;bottom:10px;
+  background:linear-gradient(180deg,#0d8ef7,#053a86);color:#fff;
+  font-weight:900;font-size:11px;padding:4px 10px;border-radius:7px;
+  box-shadow:0 4px 12px rgba(0,40,90,.4);letter-spacing:.05em;
+}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1;min-height:148px}
+.badge{
+  display:inline-flex;gap:5px;align-items:center;
+  border:1px solid rgba(0,125,210,.28);background:rgba(255,255,255,.78);
+  border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900;color:#005ba6;
+  width:fit-content;letter-spacing:.04em;
+}
+.badge.if{background:linear-gradient(180deg,#dff6ff,#a3def6);color:#0664a4;border-color:#7fc7e9}
+.badge.then{background:linear-gradient(180deg,#e6e6ff,#bccafe);color:#3236a6;border-color:#a4b1ee}
+.badge.asset{background:linear-gradient(180deg,#fff5dc,#ffd99c);color:#7f4f0a;border-color:#e9b87c}
+.badge.mentor{background:linear-gradient(180deg,#dffae6,#9bdbb1);color:#125a32;border-color:#7bc296}
+.card h3{
+  font-size:15.5px;margin:2px 0 4px;line-height:1.35;font-weight:900;color:#082345;
+  word-break:keep-all;overflow-wrap:anywhere;
+}
+.card p{font-size:12.5px;line-height:1.6;color:#465a6f;margin:0;overflow-wrap:anywhere}
+.card .meta{display:flex;justify-content:space-between;font-size:11px;color:#5d7388;margin-top:auto;font-weight:700}
+.card .meta span{display:inline-flex;align-items:center;gap:3px}
+
+/* ============== Toolbar ============== */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px}
+.toolbar button{
+  padding:9px 14px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.92);
+  background:linear-gradient(180deg,#fff,#c8d6e4);
+  font-weight:800;cursor:pointer;font-size:12.5px;
+  box-shadow:inset 0 1px 0 #fff,0 4px 10px rgba(0,42,92,.08);
+  transition:transform .15s ease;
+}
+.toolbar button:hover{transform:translateY(-1px)}
+.toolbar button.active{
+  background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff;
+  box-shadow:var(--glow);border-color:#bff4ff;
+}
+
+/* ============== Form ============== */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.form label{font-weight:900;font-size:12.5px;color:#0a3263;display:block}
+.form input,.form textarea,.form select{
+  width:100%;margin-top:6px;
+  border:1px solid rgba(0,102,180,.22);
+  border-radius:11px;background:rgba(255,255,255,.82);
+  padding:11px 12px;outline:none;font-size:13px;color:#08213c;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:#0d8ef7;box-shadow:0 0 0 3px rgba(13,142,247,.18)}
+.form textarea{min-height:96px;grid-column:1/-1;resize:vertical}
+
+/* ============== Builder ============== */
+.builder{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;margin-top:14px;
+}
+.slot{
+  min-height:218px;border:2px dashed rgba(0,111,190,.32);
+  border-radius:18px;padding:12px;
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(210,226,240,.42));
+  overflow:hidden;position:relative;transition:all .25s ease;
+}
+.slot.has-card{border-style:solid;border-color:rgba(13,142,247,.5);background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(220,235,250,.72))}
+.slot h4{margin:0 0 8px;font-size:13px;color:#0a3263;display:flex;align-items:center;gap:7px;letter-spacing:.04em}
+.slot h4 .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(180deg,#13d6ff,#0a48b6);box-shadow:0 0 8px rgba(0,180,255,.6)}
+.slot .empty-hint{font-size:12px;color:#7c92a6;text-align:center;padding:36px 8px;line-height:1.6}
+.slot .card{cursor:default;box-shadow:0 8px 18px rgba(0,42,92,.16)}
+.slot .card img{height:88px}
+.slot .card .body{padding:8px 10px;min-height:auto;gap:3px}
+.slot .card h3{font-size:12.5px;margin:3px 0;line-height:1.3}
+.slot .card p{display:none}
+.slot .card .meta{display:none}
+.slot .card .badge{font-size:10px;padding:2px 6px}
+.slot .remove-btn{
+  position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,.9);border:1px solid #d0d8e2;
+  cursor:pointer;font-weight:900;color:#a02428;font-size:13px;line-height:1;
+  display:none;
+}
+.slot.has-card .remove-btn{display:grid;place-items:center}
+
+.result{
+  white-space:pre-wrap;background:linear-gradient(135deg,#031629,#073f7d 60%,#021530);
+  color:#dff8ff;border-radius:18px;padding:18px;
+  border:1px solid rgba(0,220,255,.4);
+  box-shadow:inset 0 0 24px rgba(0,160,255,.16);
+  font-size:13.5px;line-height:1.75;margin-top:14px;
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+
+/* ============== Premium Grid ============== */
+.premium-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));gap:14px}
+.prem-tile{
+  position:relative;padding:18px;border-radius:18px;
+  background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(184,202,219,.78));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 30px rgba(0,42,92,.14),inset 0 1px 0 #fff;
+  overflow:hidden;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;
+}
+.prem-tile:hover{transform:translateY(-3px);box-shadow:var(--glow),0 18px 36px rgba(0,40,80,.2)}
+.prem-tile .ico{
+  width:46px;height:46px;border-radius:13px;
+  background:linear-gradient(160deg,#0fb6f5,#053a86);
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 6px 14px rgba(0,80,180,.35),inset 0 1px 0 rgba(255,255,255,.4);
+  margin-bottom:10px;
+}
+.prem-tile h4{margin:0 0 5px;font-size:14.5px;color:#082345}
+.prem-tile p{margin:0 0 10px;font-size:12px;line-height:1.55;color:#465a6f}
+.prem-tile button{
+  padding:7px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(180deg,#fff,#cfdde9);font-weight:900;font-size:11.5px;cursor:pointer;
+  box-shadow:inset 0 1px 0 #fff;
+}
+
+/* ============== Modal ============== */
+.modal{position:fixed;inset:0;background:rgba(2,12,28,.65);display:none;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(6px);animation:fadeIn .2s ease}
+.modal.show{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-card{
+  width:min(720px,92vw);max-height:88vh;overflow:auto;
+  border-radius:22px;
+  background:linear-gradient(180deg,#fbfdff,#bcccdc);
+  border:1px solid #fff;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+  padding:24px;animation:popIn .25s ease;
+}
+@keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-card h3{margin:0 0 8px;font-size:18px;color:#08294f;display:flex;align-items:center;gap:10px}
+.modal-card p{font-size:13.5px;line-height:1.7;color:#3a4f66}
+.modal-card .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+/* ============== Activity ============== */
+.activity{display:grid;gap:8px}
+.activity div{
+  padding:10px 12px;border-radius:12px;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.9);
+  font-size:12.5px;color:#3a4f66;display:flex;gap:8px;align-items:flex-start;
+}
+.activity div b{color:#08294f;font-weight:900}
+.activity .dot{width:8px;height:8px;border-radius:50%;background:#13d6ff;margin-top:6px;box-shadow:0 0 6px #13d6ff;flex-shrink:0}
+
+/* ============== Share ============== */
+.share-layout{display:grid;grid-template-columns:1fr .9fr;gap:16px}
+.share-card{
+  border-radius:20px;
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(200,215,228,.72));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 16px 34px rgba(0,42,92,.14);
+  padding:16px;position:relative;overflow:hidden;
+}
+.share-card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(0,207,255,.16),transparent);transform:translateX(-110%);pointer-events:none}
+.share-card:hover:before{animation:scan 1s}
+.project-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:8px}
+.project-head img{width:120px;height:80px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.95);box-shadow:0 8px 18px rgba(0,42,92,.18)}
+.project-title{font-weight:900;font-size:17px;margin:0 0 4px;color:#082347}
+.project-meta{font-size:11.5px;color:var(--muted)}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.pill{
+  border:1px solid rgba(0,125,210,.25);
+  background:rgba(255,255,255,.78);
+  border-radius:999px;padding:3px 9px;font-weight:800;font-size:11px;color:#005ba6;
+}
+.score{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
+.score div{
+  padding:8px 6px;border-radius:11px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.95);
+  font-weight:900;text-align:center;font-size:12px;color:#0a3263;
+}
+.score div b{display:block;font-size:18px;color:#0a48b6;line-height:1.2}
+.score div small{font-size:10px;color:var(--muted);font-weight:700}
+.comment-box{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:12px}
+.comment-box input{
+  border:1px solid rgba(0,102,180,.22);border-radius:11px;padding:10px 12px;
+  background:rgba(255,255,255,.85);font-size:13px;
+}
+.comment-box button{padding:10px 16px;border-radius:11px;border:0;cursor:pointer;background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff;font-weight:900;font-size:12.5px;box-shadow:var(--glow)}
+.comments{display:grid;gap:6px;margin-top:8px;max-height:180px;overflow:auto}
+.comments div{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:11px;padding:8px 10px;font-size:12.5px;color:#3a4f66;
+}
+.comments div b{color:#0a3263}
+.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.share-actions button{
+  flex:1;min-width:90px;padding:9px 10px;border-radius:11px;
+  border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(180deg,#fff,#cfdde9);
+  font-weight:900;font-size:11.5px;cursor:pointer;
+  box-shadow:inset 0 1px 0 #fff;color:#0a3263;
+}
+.share-actions button:hover{background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff}
+.sns-preview{
+  background:linear-gradient(135deg,#06182d,#0d3b73);color:#dff8ff;
+  border-radius:16px;padding:14px;white-space:pre-wrap;
+  border:1px solid rgba(0,220,255,.35);
+  box-shadow:inset 0 0 24px rgba(0,160,255,.14);font-size:13px;line-height:1.7;
+}
+
+/* ============== Timeline ============== */
+.timeline{display:grid;gap:10px}
+.timeline .step{
+  display:flex;gap:12px;align-items:flex-start;padding:12px 14px;
+  border-radius:14px;background:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 6px 14px rgba(0,42,92,.08);
+}
+.step .num{
+  display:inline-grid;place-items:center;min-width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(180deg,#16dbff,#0a48b6);color:#fff;
+  box-shadow:var(--glow);font-weight:900;font-size:13px;flex-shrink:0;
+}
+.step b{display:block;font-size:13.5px;color:#08294f;margin-bottom:2px}
+.step span{font-size:12px;color:#465a6f;line-height:1.55}
+
+/* ============== Builder Effects ============== */
+.fx-layer{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.synthesis-beam{
+  position:fixed;left:50%;top:50%;width:0;height:0;border-radius:999px;
+  background:radial-gradient(circle,rgba(255,255,255,.95),rgba(0,217,255,.78) 22%,rgba(0,122,255,.25) 46%,transparent 70%);
+  transform:translate(-50%,-50%);opacity:0;
+}
+.synthesis-beam.run{animation:beamPulse 1.4s ease-out}
+.fx-text{
+  position:fixed;left:50%;top:42%;transform:translate(-50%,-50%) scale(.8);
+  padding:20px 32px;border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(145,184,214,.88));
+  border:1px solid #fff;
+  box-shadow:0 0 56px rgba(0,174,255,.7),inset 0 1px 0 #fff;
+  color:#031b37;font-weight:900;font-size:30px;letter-spacing:.08em;
+  opacity:0;text-align:center;text-shadow:0 1px 0 #fff;
+}
+.fx-text.run{animation:completePop 1.9s ease-out}
+.particle{
+  position:fixed;width:9px;height:9px;border-radius:50%;
+  background:linear-gradient(180deg,#fff,#13d6ff 45%,#006cff);
+  box-shadow:0 0 18px #13d6ff;left:50%;top:50%;opacity:0;
+}
+.particle.run{animation:particleBurst 1.5s ease-out forwards}
+.slot.flash{animation:slotFlash 1.3s ease-out}
+.result.completed{animation:resultGlow 1.5s ease-out}
+
+/* Sound Toggle */
+.sound-toggle{
+  position:fixed;right:18px;bottom:18px;z-index:6;
+  border-radius:999px;padding:11px 16px;
+  border:1px solid rgba(255,255,255,.92);
+  background:linear-gradient(180deg,#fff,#b7c8d8 50%,#f2f8ff);
+  box-shadow:0 12px 28px rgba(0,45,90,.22),inset 0 1px 0 #fff;
+  font-weight:900;cursor:pointer;color:#08213c;font-size:12.5px;
+}
+.sound-toggle.on{
+  background:linear-gradient(180deg,#22e6ff,#0a6bdc 55%,#061d45);color:#fff;
+  box-shadow:0 0 28px rgba(0,174,255,.65);
+}
+@keyframes beamPulse{0%{width:0;height:0;opacity:0}22%{width:30vw;height:30vw;opacity:.95}100%{width:160vw;height:160vw;opacity:0}}
+@keyframes completePop{0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}45%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-62%) scale(1.04)}}
+@keyframes particleBurst{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.05)}}
+@keyframes slotFlash{0%{box-shadow:0 0 0 rgba(0,217,255,0)}30%{box-shadow:0 0 40px rgba(0,217,255,.85),inset 0 0 24px rgba(255,255,255,.85);border-color:rgba(0,217,255,.95)}100%{box-shadow:none}}
+@keyframes resultGlow{0%{box-shadow:inset 0 0 24px rgba(0,160,255,.16)}35%{box-shadow:0 0 44px rgba(0,217,255,.78),inset 0 0 36px rgba(0,217,255,.28)}100%{box-shadow:inset 0 0 24px rgba(0,160,255,.16)}}
+
+/* ============== Builder Hand ============== */
+.builder-hand{
+  margin-top:18px;border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(186,206,224,.5));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 32px rgba(0,42,92,.14);
+  padding:16px;
+}
+.builder-hand h3{margin:0 0 8px;font-size:15px;color:#082347;display:flex;align-items:center;gap:8px}
+.hand-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.hand-tabs button{
+  border-radius:999px;border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(180deg,#fff,#bccbda);padding:8px 14px;
+  font-weight:900;cursor:pointer;font-size:12px;
+  box-shadow:inset 0 1px 0 #fff,0 4px 10px rgba(0,42,92,.08);
+}
+.hand-tabs button.active{
+  background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff;
+  box-shadow:var(--glow);border-color:#bff4ff;
+}
+.hand-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(154px,1fr));gap:10px;
+  max-height:440px;overflow:auto;padding-right:4px;
+}
+.hand-grid .card img{height:100px}
+.hand-grid .card .body{min-height:120px;padding:9px 10px;gap:3px}
+.hand-grid .card h3{font-size:12.5px;margin:4px 0;line-height:1.3}
+.hand-grid .card p{font-size:11px;line-height:1.4}
+.hand-grid .card .meta{display:none}
+.hand-grid .badge{font-size:9.5px;padding:2px 6px}
+
+/* ============== Match Stage ============== */
+.match-stage{
+  margin-top:14px;border-radius:20px;
+  background:linear-gradient(135deg,#031629,#0a4585 50%,#02152d);
+  color:#e9fbff;border:1px solid rgba(0,217,255,.45);
+  box-shadow:0 0 36px rgba(0,174,255,.32),inset 0 0 28px rgba(0,174,255,.14);
+  padding:18px;display:none;overflow:hidden;position:relative;
+}
+.match-stage.show{display:block}
+.match-stage:before{
+  content:"";position:absolute;inset:-50%;
+  background:conic-gradient(from 0deg,transparent,rgba(0,217,255,.3),transparent,rgba(255,255,255,.18),transparent);
+  animation:rotateGlow 5s linear infinite;
+}
+.match-stage>*{position:relative;z-index:1}
+.match-title{font-size:21px;font-weight:900;margin-bottom:6px;letter-spacing:.04em}
+.match-sub{font-size:13px;color:#a4dcf2;margin-bottom:8px}
+.solution-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.flow-node{
+  min-height:96px;border-radius:14px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(164,235,255,.4);
+  padding:12px;text-align:center;opacity:0;
+  transform:translateY(18px) scale(.96);
+  font-size:13px;
+}
+.flow-node b{display:block;color:#9bf2ff;margin-bottom:5px;font-size:11.5px;letter-spacing:.1em}
+.match-stage.show .flow-node{animation:flowIn .65s ease-out forwards}
+.match-stage.show .flow-node:nth-child(2){animation-delay:.25s}
+.match-stage.show .flow-node:nth-child(3){animation-delay:.5s}
+.match-stage.show .flow-node:nth-child(4){animation-delay:.75s}
+.pulse-line{
+  height:5px;border-radius:999px;
+  background:linear-gradient(90deg,#13d6ff,#fff,#0a73e6);
+  box-shadow:0 0 18px #13d6ff;margin:14px 0;
+  transform-origin:left;transform:scaleX(0);
+}
+.match-stage.show .pulse-line{animation:lineGrow 1.05s ease-out forwards}
+.match-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.match-meta div{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);
+  border-radius:12px;padding:10px;text-align:center;font-weight:900;font-size:13px;
+}
+.match-meta div small{display:block;font-size:10.5px;color:#9bf2ff;font-weight:700;letter-spacing:.08em;margin-bottom:3px}
+@keyframes rotateGlow{to{transform:rotate(360deg)}}
+@keyframes flowIn{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes lineGrow{to{transform:scaleX(1)}}
+
+/* ============== Analytics ============== */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{
+  padding:16px;border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(207,221,233,.74));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 30px rgba(0,42,92,.13),inset 0 1px 0 #fff;
+  position:relative;overflow:hidden;
+}
+.kpi .lbl{font-size:11.5px;color:var(--muted);font-weight:800;letter-spacing:.08em}
+.kpi b{font-size:26px;color:#053884;display:block;margin-top:3px;font-weight:900}
+.kpi .delta{font-size:12px;font-weight:800;margin-top:3px}
+.kpi .delta.up{color:#0a8a4d}
+.kpi .delta.down{color:#c64523}
+.kpi-row + .two{margin-bottom:16px}
+.chart-card{
+  border-radius:18px;padding:16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(207,221,233,.74));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 14px 30px rgba(0,42,92,.13);
+}
+.chart-card h4{margin:0 0 12px;font-size:13.5px;color:#082347;display:flex;align-items:center;justify-content:space-between}
+.chart-card h4 .legend{font-size:11px;color:var(--muted);font-weight:700}
+.bar-chart{display:flex;align-items:flex-end;gap:10px;height:200px;padding:0 4px}
+.bar-chart .bar{
+  flex:1;border-radius:8px 8px 0 0;
+  background:linear-gradient(180deg,#22e0ff,#0a48b6);
+  position:relative;min-height:6px;transition:all .6s ease;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4);
+}
+.bar-chart .bar:after{content:attr(data-val);position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:11px;font-weight:900;color:#053884}
+.bar-chart .bar:before{content:attr(data-lbl);position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);font-size:10.5px;font-weight:800;color:var(--muted);white-space:nowrap}
+.bar-chart-wrap{padding-bottom:30px}
+.donut{position:relative;width:170px;height:170px;margin:6px auto}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut .center{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+}
+.donut .center b{font-size:26px;color:#053884;display:block;line-height:1}
+.donut .center small{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.08em;margin-top:2px}
+.donut-legend{display:grid;gap:6px;margin-top:10px;font-size:12px}
+.donut-legend div{display:flex;align-items:center;gap:8px;color:#3a4f66;font-weight:700}
+.donut-legend .sw{width:11px;height:11px;border-radius:3px}
+.line-chart{height:200px;width:100%}
+.heatmap{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.heatmap .cell{aspect-ratio:1;border-radius:4px;background:rgba(13,142,247,.12);transition:transform .15s ease}
+.heatmap .cell:hover{transform:scale(1.15)}
+.heatmap .cell.l1{background:rgba(13,142,247,.22)}
+.heatmap .cell.l2{background:rgba(13,142,247,.42)}
+.heatmap .cell.l3{background:rgba(13,142,247,.62)}
+.heatmap .cell.l4{background:rgba(13,142,247,.85)}
+.heatmap-legend{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:8px;justify-content:flex-end}
+.heatmap-legend .lvl{width:14px;height:14px;border-radius:3px}
+
+/* ============== Footer ============== */
+.footer{
+  margin-top:30px;padding:18px 22px;border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(204,216,228,.55));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 10px 24px rgba(0,42,92,.08);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:#3a4f66;
+}
+.footer .links{display:flex;gap:14px;flex-wrap:wrap}
+.footer .links a{color:#0a3263;font-weight:700}
+
+/* ============== Drag & Drop ============== */
+.card[draggable="true"]{cursor:grab}
+.card.dragging{opacity:.45;transform:scale(.95) rotate(-2deg);cursor:grabbing}
+.slot.drop-target{
+  border-style:solid !important;
+  border-color:#13d6ff !important;
+  background:linear-gradient(180deg,rgba(190,235,255,.7),rgba(140,210,250,.5)) !important;
+  box-shadow:0 0 32px rgba(0,217,255,.6),inset 0 0 22px rgba(255,255,255,.6);
+  animation:dropPulse .9s ease-in-out infinite;
+}
+.slot.drag-hover{
+  transform:scale(1.03);
+  border-color:#13d6ff !important;
+  background:linear-gradient(180deg,rgba(140,225,255,.8),rgba(80,180,240,.55)) !important;
+  box-shadow:0 0 44px rgba(0,217,255,.85),inset 0 0 28px rgba(255,255,255,.7);
+}
+@keyframes dropPulse{0%,100%{box-shadow:0 0 22px rgba(0,217,255,.45),inset 0 0 18px rgba(255,255,255,.5)}50%{box-shadow:0 0 38px rgba(0,217,255,.85),inset 0 0 28px rgba(255,255,255,.75)}}
+.touch-ghost{
+  position:fixed;pointer-events:none;z-index:9999;
+  width:160px;border-radius:14px;overflow:hidden;
+  box-shadow:0 22px 50px rgba(0,40,90,.45),0 0 24px rgba(0,217,255,.7);
+  border:2px solid #13d6ff;
+  transform:translate(-50%,-50%) scale(.92);
+  background:#fff;opacity:.94;
+}
+.touch-ghost img{width:100%;height:80px;object-fit:cover;display:block}
+.touch-ghost .lbl{padding:6px 8px;font-size:11px;font-weight:900;color:#082347;text-align:center;background:#fff}
+
+/* ============== Lang Switcher ============== */
+.lang-switch{
+  display:flex;gap:2px;padding:3px;border-radius:999px;
+  background:linear-gradient(180deg,#fff,#cfdde9);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 8px 18px rgba(0,42,88,.12),inset 0 1px 0 #fff;
+}
+.lang-switch button{
+  border:0;background:transparent;cursor:pointer;
+  padding:6px 11px;border-radius:999px;font-weight:900;font-size:11.5px;
+  color:#08213c;transition:all .18s ease;letter-spacing:.05em;
+}
+.lang-switch button.active{
+  background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff;
+  box-shadow:var(--glow);
+}
+
+/* ============== API Config Modal ============== */
+.api-status{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em;
+  background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);
+  cursor:pointer;color:#082347;
+}
+.api-status .dot-ind{width:8px;height:8px;border-radius:50%;background:#999}
+.api-status.connected .dot-ind{background:#0bcf6a;box-shadow:0 0 6px rgba(11,207,106,.7)}
+.api-status.error .dot-ind{background:#e0533a}
+
+/* ============== Toast ============== */
+.toast{
+  position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);
+  background:linear-gradient(180deg,#fff,#d6e3ee);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:14px;padding:12px 22px;
+  box-shadow:0 16px 40px rgba(0,30,80,.25),var(--glow);
+  font-weight:900;color:#082347;font-size:13.5px;
+  display:flex;align-items:center;gap:10px;z-index:200;
+  opacity:0;pointer-events:none;transition:all .3s ease;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast .ico{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(180deg,#13d6ff,#0a48b6);color:#fff;
+  display:grid;place-items:center;
+}
+
+/* ============== AI Loading Spinner ============== */
+.ai-loading{
+  display:none;align-items:center;gap:10px;
+  padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,#031629,#0a4585);
+  color:#dff8ff;font-weight:800;font-size:13px;
+  margin-top:14px;border:1px solid rgba(0,217,255,.45);
+  box-shadow:inset 0 0 22px rgba(0,160,255,.18);
+}
+.ai-loading.show{display:flex}
+.ai-loading .spinner{
+  width:20px;height:20px;border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.2);
+  border-top-color:#13d6ff;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.persist-banner{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 12px;margin-bottom:10px;border-radius:11px;
+  background:linear-gradient(180deg,rgba(220,250,235,.85),rgba(155,219,177,.6));
+  border:1px solid rgba(155,219,177,.7);
+  font-size:12px;color:#125a32;font-weight:700;
+}
+
+/* ============== Responsive ============== */
+@media(max-width:1100px){
+  .stats,.kpi-row{grid-template-columns:repeat(2,1fr)}
+  .two,.share-layout{grid-template-columns:1fr}
+}
+@media(max-width:820px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto;box-shadow:none}
+  .nav{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+  .plan{margin-top:14px}
+  .form{grid-template-columns:1fr}
+  .grid,.builder,.premium-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .stats,.kpi-row,.grid,.builder,.premium-grid{grid-template-columns:1fr}
+  .hero h1{font-size:26px}
+  .hero .copy{padding:28px 20px}
+  .main{padding:14px}
+  .top{gap:8px}
+  .icon-btn{width:38px;height:38px}
+  .solution-flow,.match-meta{grid-template-columns:1fr 1fr}
+  .score{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== APP SHELL ====== -->
+<div class="app">
+
+  <!-- ============ Sidebar ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">if</div>
+      <div class="brand-text">
+        <b>ifLink NEXT</b>
+        <small>IF-THEN INNOVATION OS</small>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="active" data-tab="home"><span class="ico">🏠</span><span data-i18n="nav_home">HOME / 概要</span></button>
+      <button data-tab="holder"><span class="ico">📇</span><span data-i18n="nav_holder">カードホルダー</span></button>
+      <button data-tab="register"><span class="ico">📝</span><span data-i18n="nav_register">名刺・モジュール登録</span></button>
+      <button data-tab="builder"><span class="ico">⚡</span><span data-i18n="nav_builder">共創ビルダー</span></button>
+      <button data-tab="market"><span class="ico">🛒</span><span data-i18n="nav_market">マーケットプレイス</span></button>
+      <button data-tab="mentor"><span class="ico">👔</span><span data-i18n="nav_mentor">メンター</span></button>
+      <button data-tab="community"><span class="ico">🌐</span><span data-i18n="nav_community">共創共有</span></button>
+      <button data-tab="analytics"><span class="ico">📊</span><span data-i18n="nav_analytics">分析・レポート</span></button>
+      <button data-tab="premium"><span class="ico">💎</span><span data-i18n="nav_premium">プレミアム機能</span></button>
+    </nav>
+    <div class="plan">
+      <b data-i18n="plan_free">FREE プラン</b>
+      <p data-i18n="plan_desc">カード閲覧・登録・共創案生成までを無料で体験。プレミアムで権利保全・マーケット決済・メンター相談が解放。</p>
+      <button class="metal-btn" data-i18n="plan_upgrade" onclick="openModal('💎 Premium','クローズドルーム / IPガード / マーケット連携 / 24h メンターアバター / 特許出願サポート / 高度分析レポートが解放されます。月額 9,800円〜。')">プレミアムに登録</button>
+    </div>
+  </aside>
+
+  <!-- ============ Main ============ -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="top">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" data-i18n-ph="search_ph" placeholder="キーワード・技術・素材・スキル・企業を検索" oninput="renderHolder()">
+      </div>
+      <div class="top-right">
+        <div class="lang-switch" id="langSwitch">
+          <button data-lang="ja" class="active">🇯🇵 JA</button>
+          <button data-lang="en">🇬🇧 EN</button>
+          <button data-lang="zh">🇨🇳 中</button>
+        </div>
+        <div class="api-status" id="apiStatus" onclick="openApiConfig()" title="AI API設定">
+          <span class="dot-ind"></span><span id="apiStatusText">AI: OFF</span>
+        </div>
+        <div class="icon-btn" title="通知" onclick="openModal(t('notify_title'),t('notify_body'))">
+          🔔<span class="badge-dot"></span>
+        </div>
+        <div class="icon-btn" title="ブックマーク" onclick="openModal(t('bm_title'),t('bm_body'))">📑</div>
+        <div class="point" title="EX POINT">
+          <span class="lbl" data-i18n="point_lbl">EX POINT</span>
+          <span id="points">2,850</span> pt
+        </div>
+        <div class="user-chip" onclick="openModal('👤 山田 太郎','Innovate株式会社 / 事業開発マネージャー\n保有カード: 24 / フォロー: 156 / 共創成立: 21')">
+          <img src="assets/images/mentor-1.jpg" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+          <span>山田 太郎</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ HOME ============ -->
+    <section id="home" class="section active">
+      <div class="hero">
+        <img class="bg" src="assets/images/hero.jpg" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+        <div class="copy">
+          <h1><span data-i18n="hero_h1_a">異業種をつなぎ、</span><em data-i18n="hero_h1_em">IF-THEN</em><span data-i18n="hero_h1_b">で未来を共創する。</span></h1>
+          <p data-i18n="hero_p">サービス・技術・素材・ノウハウ・スキルを名刺カード化。IF / THEN モジュールを組み合わせ、PoC・新規事業・マーケティング・権利保全までを一気通貫で進める 共創DX人材育成OS です。</p>
+          <div class="actions">
+            <button class="primary" data-i18n="btn_demo" onclick="startDemo()">▶ 30秒体験デモ</button>
+            <button class="secondary" data-i18n="btn_open_builder" onclick="showTab('builder')">共創ビルダーを開く</button>
+            <button class="secondary" data-i18n="btn_view_analytics" onclick="showTab('analytics')">📊 分析を見る</button>
+          </div>
+          <div class="hero-tags">
+            <span data-i18n="tag_match">異業種マッチング</span><span data-i18n="tag_poc">PoC自動生成</span><span data-i18n="tag_ip">NDA・特許支援</span><span data-i18n="tag_mentor">メンターAI</span><span data-i18n="tag_market">マーケット連携</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="ico-bg">🃏</div>
+          <div class="lbl" data-i18n="stat_cards">登録カード</div>
+          <b id="statCards">1,234</b>
+          <div class="delta">▲ +56 / <span data-i18n="delta_week">今週</span></div>
+        </div>
+        <div class="stat">
+          <div class="ico-bg">⚡</div>
+          <div class="lbl" data-i18n="stat_proj">共創プロジェクト</div>
+          <b>128</b>
+          <div class="delta">▲ +9 / <span data-i18n="delta_week">今週</span></div>
+        </div>
+        <div class="stat">
+          <div class="ico-bg">👥</div>
+          <div class="lbl" data-i18n="stat_members">メンバー</div>
+          <b>3,567</b>
+          <div class="delta">▲ +118 / <span data-i18n="delta_month">今月</span></div>
+        </div>
+        <div class="stat">
+          <div class="ico-bg">🤝</div>
+          <div class="lbl" data-i18n="stat_match">マッチング成立</div>
+          <b>386</b>
+          <div class="delta">▲ +21 / <span data-i18n="delta_week">今週</span></div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <h2>要求仕様への対応 <span class="pill-tag">CORE VALUE</span></h2>
+          <p class="desc">IF-THEN OS が提供する4つの中核機能</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card" onclick="showTab('holder')">
+          <div class="body">
+            <span class="badge">FREE</span>
+            <h3>IF-THEN カード活用</h3>
+            <p>基礎カードを参照し、自社モジュールを IF / THEN として登録。共創の起点を作ります。</p>
+            <div class="meta"><span>👀 12,450</span><span>⭐ 4.8</span></div>
+          </div>
+        </div>
+        <div class="card" onclick="showTab('register')">
+          <div class="body">
+            <span class="badge">MODULE</span>
+            <h3>機器だけではないカード化</h3>
+            <p>センサー・デバイス・技術・素材・ノウハウ・スキルまで全てカード化可能。</p>
+            <div class="meta"><span>👀 8,230</span><span>⭐ 4.7</span></div>
+          </div>
+        </div>
+        <div class="card" onclick="showTab('premium')">
+          <div class="body">
+            <span class="badge">PREMIUM</span>
+            <h3>秘匿共創・権利保全</h3>
+            <p>NDA / タイムスタンプ / 特許出願支援 / クローズドルームで安全な共創を実現。</p>
+            <div class="meta"><span>👀 6,810</span><span>⭐ 4.9</span></div>
+          </div>
+        </div>
+        <div class="card" onclick="showTab('market')">
+          <div class="body">
+            <span class="badge">MARKET</span>
+            <h3>モジュール売買</h3>
+            <p>Amazon等の外部決済連携を想定したマーケット導線で、収益化までスムーズに。</p>
+            <div class="meta"><span>👀 5,420</span><span>⭐ 4.6</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two" style="margin-top:18px">
+        <div class="panel">
+          <h3 class="title">💡 おすすめ共創テーマ</h3>
+          <div class="activity" id="recommendList"></div>
+        </div>
+        <div class="panel">
+          <h3 class="title">📰 プラットフォームニュース</h3>
+          <div class="activity">
+            <div><span class="dot"></span><div><b>新機能 分析レポートβ</b> をリリース<br><small>2026.04.20 — IF-THEN マッチング履歴を多角的に可視化</small></div></div>
+            <div><span class="dot"></span><div><b>共創マッチ #386</b> が成立<br><small>2026.04.19 — 観光ビッグデータ × IoTセンサー</small></div></div>
+            <div><span class="dot"></span><div><b>プレミアム限定ウェビナー</b><br><small>2026.04.18 — 「IPガード活用入門」開催</small></div></div>
+            <div><span class="dot"></span><div><b>IP保護機能</b> が強化されました<br><small>2026.04.17 — タイムスタンプ・電子署名を追加</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Card Holder ============ -->
+    <section id="holder" class="section">
+      <div class="section-head">
+        <div>
+          <h2>カードホルダー <span class="pill-tag">CARD VAULT</span></h2>
+          <p class="desc">IF / THEN / ASSET / MENTOR をカテゴリ・キーワードで絞り込み。クリックで共創ビルダーへ投入。</p>
+        </div>
+      </div>
+      <div class="toolbar" id="filters"></div>
+      <div class="grid" id="cardGrid"></div>
+    </section>
+
+    <!-- ============ Register ============ -->
+    <section id="register" class="section">
+      <div class="section-head">
+        <div>
+          <h2>名刺・モジュール登録 <span class="pill-tag">CARD CREATE</span></h2>
+          <p class="desc">あなたの強みを IF / THEN / ASSET としてカード化し、共創エコシステムに投入します。</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="form">
+          <div>
+            <label>カードタイプ</label>
+            <select id="regType">
+              <option value="IF">IF（きっかけ・条件）</option>
+              <option value="THEN">THEN（結果・価値）</option>
+              <option value="ASSET">ASSET（技術・素材・スキル）</option>
+            </select>
+          </div>
+          <div>
+            <label>提供企業 / 個人</label>
+            <input id="regCompany" placeholder="例: 山田太郎 / Innovate株式会社">
+          </div>
+          <div>
+            <label>カード名</label>
+            <input id="regTitle" placeholder="例: 設備振動センサー">
+          </div>
+          <div>
+            <label>業界カテゴリ</label>
+            <select id="regCategory">
+              <option>製造</option><option>観光</option><option>医療・ヘルスケア</option>
+              <option>教育</option><option>金融</option><option>農業</option>
+              <option>物流</option><option>エネルギー</option><option>その他</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1"><label>説明</label><textarea id="regDesc" placeholder="カードの強み・想定ユースケース・連携可能な領域などを記述"></textarea></div>
+          <div>
+            <label>連携希望（タグ）</label>
+            <input id="regTags" placeholder="例: AI, IoT, 観光, データ可視化">
+          </div>
+          <div>
+            <label>権利保全レベル</label>
+            <select>
+              <option>標準（公開）</option>
+              <option>NDA必須（プレミアム）</option>
+              <option>クローズドルームのみ（プレミアム）</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="primary" onclick="registerCard()">＋ カードを登録（+50pt）</button>
+          <button class="secondary" onclick="openModal('📷 名刺スキャン','スマホカメラから名刺を撮影 → AI が自動でテキスト・組織情報を抽出 → IFカード候補を生成します。')" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">📷 名刺をスキャン</button>
+          <button class="secondary" onclick="openModal('🤖 AI支援登録','テキストを入力するだけで、AIが IF / THEN / ASSET を自動分類しタグを生成します。')" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">🤖 AI支援登録</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Builder ============ -->
+    <section id="builder" class="section">
+      <div class="section-head">
+        <div>
+          <h2>共創ビルダー <span class="pill-tag">IF × THEN × ASSET</span></h2>
+          <p class="desc">手持ちカードから IF / THEN / ASSET / MENTOR を選び、AI が PoC 案・マッチング解を即時生成します。</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="builder">
+          <div class="slot" id="slot-IF">
+            <h4><span class="dot"></span><span data-i18n="slot_if">IFカード（きっかけ・条件）</span></h4>
+            <div class="empty-hint" id="hint-IF" data-i18n="hint_if">下の手持ちから IF カードを選択・ドロップ</div>
+            <button class="remove-btn" onclick="clearSlot('IF')">×</button>
+          </div>
+          <div class="slot" id="slot-THEN">
+            <h4><span class="dot"></span><span data-i18n="slot_then">THENカード（結果・価値）</span></h4>
+            <div class="empty-hint" id="hint-THEN" data-i18n="hint_then">下の手持ちから THEN カードを選択・ドロップ</div>
+            <button class="remove-btn" onclick="clearSlot('THEN')">×</button>
+          </div>
+          <div class="slot" id="slot-ASSET">
+            <h4><span class="dot"></span><span data-i18n="slot_asset">ASSETカード（技術・素材）</span></h4>
+            <div class="empty-hint" id="hint-ASSET" data-i18n="hint_asset">任意：補強したい資産を選択・ドロップ</div>
+            <button class="remove-btn" onclick="clearSlot('ASSET')">×</button>
+          </div>
+          <div class="slot" id="slot-MENTOR">
+            <h4><span class="dot"></span><span data-i18n="slot_mentor">MENTOR（伴走者）</span></h4>
+            <div class="empty-hint" id="hint-MENTOR" data-i18n="hint_mentor">任意：相談したいメンターを選択・ドロップ</div>
+            <button class="remove-btn" onclick="clearSlot('MENTOR')">×</button>
+          </div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="primary" data-i18n="btn_generate" onclick="generateIdea()">⚡ 共創アイデアを生成</button>
+          <button class="secondary" data-i18n="btn_reset" onclick="resetBuilder()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">🔄 リセット</button>
+          <button class="secondary" data-i18n="btn_random" onclick="randomCombo()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">🎲 ランダム提案</button>
+        </div>
+        <div id="aiLoading" class="ai-loading"><div class="spinner"></div><span id="aiLoadingText">AIが提案を生成中...</span></div>
+        <div id="result" class="result" style="display:none"></div>
+        <div id="matchStage" class="match-stage">
+          <div class="match-title">🌟 過去マッチングDB ヒット</div>
+          <div class="match-sub" id="matchSub">類似する成立済み共創ソリューションが見つかりました。</div>
+          <div class="solution-flow">
+            <div class="flow-node"><b>STEP 1</b><span id="flow1">IF条件の整理</span></div>
+            <div class="flow-node"><b>STEP 2</b><span id="flow2">ASSET活用設計</span></div>
+            <div class="flow-node"><b>STEP 3</b><span id="flow3">PoC・実証</span></div>
+            <div class="flow-node"><b>STEP 4</b><span id="flow4">THEN実現</span></div>
+          </div>
+          <div class="pulse-line"></div>
+          <div class="match-meta">
+            <div><small>類似度</small><span id="matchScore">92%</span></div>
+            <div><small>過去成立件数</small><span id="matchCount">37件</span></div>
+            <div><small>推奨期間</small><span id="matchTerm">3〜6ヶ月</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="builder-hand">
+        <h3 data-i18n="hand_title">🃏 手持ちカード（クリックまたはドラッグで投入）</h3>
+        <div class="hand-tabs" id="handTabs"></div>
+        <div class="hand-grid" id="handGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ Market ============ -->
+    <section id="market" class="section">
+      <div class="section-head">
+        <div>
+          <h2>マーケットプレイス <span class="pill-tag">MODULE TRADE</span></h2>
+          <p class="desc">優れた IF / THEN / ASSET モジュールを売買。Amazon Pay 連携で即時決済可能。</p>
+        </div>
+      </div>
+      <div class="hero" style="min-height:200px">
+        <img class="bg" src="assets/images/market_hero.jpg" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+        <div class="copy" style="min-height:200px;padding:30px 36px">
+          <h1 style="font-size:26px">月間流通額 <em>¥ 38.4M</em></h1>
+          <p>登録モジュール 412 / 取引成立 1,205 件 / 平均評価 ★ 4.7</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button class="active">すべて</button>
+        <button>💎 注目</button>
+        <button>🔥 売れ筋</button>
+        <button>🆕 新着</button>
+        <button>💰 ¥10万以下</button>
+        <button>🎯 高評価</button>
+      </div>
+      <div class="grid" id="marketGrid"></div>
+    </section>
+
+    <!-- ============ Mentor ============ -->
+    <section id="mentor" class="section">
+      <div class="section-head">
+        <div>
+          <h2>メンターページ <span class="pill-tag">EXPERT NETWORK</span></h2>
+          <p class="desc">事業開発・知財・技術・マーケティングのプロが伴走。30分から相談可能。</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button class="active">すべて</button>
+        <button>💼 事業開発</button>
+        <button>⚖️ 知財・法務</button>
+        <button>🏭 製造・品質</button>
+        <button>📈 マーケ・営業</button>
+        <button>🤖 AI・データ</button>
+      </div>
+      <div class="grid" id="mentorGrid"></div>
+    </section>
+
+    <!-- ============ Community ============ -->
+    <section id="community" class="section">
+      <div class="section-head">
+        <div>
+          <h2>共創共有 <span class="pill-tag">COMMUNITY</span></h2>
+          <p class="desc">プロジェクトの進捗・成果を仲間と共有し、SNS にも展開できます。</p>
+        </div>
+      </div>
+      <div class="hero" style="min-height:180px">
+        <img class="bg" src="assets/images/community_hero.jpg" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+        <div class="copy" style="min-height:180px;padding:28px 36px">
+          <h1 style="font-size:24px">共創を、もっと広く。</h1>
+          <p>あなたのプロジェクトを公開し、共感する仲間・投資家・メンターと出会いましょう。</p>
+        </div>
+      </div>
+      <div class="share-layout" id="shareList"></div>
+    </section>
+
+    <!-- ============ Analytics ============ -->
+    <section id="analytics" class="section">
+      <div class="section-head">
+        <div>
+          <h2>分析・レポート <span class="pill-tag">ANALYTICS β</span></h2>
+          <p class="desc">あなたのカード運用・マッチング成果を可視化。CSV エクスポート対応（プレミアム）。</p>
+        </div>
+        <div>
+          <button class="primary" onclick="showToast('📥 CSVをエクスポートしました')">📥 CSV出力</button>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi"><div class="lbl">マッチング成立率</div><b>68.4%</b><div class="delta up">▲ +4.2pt 先月比</div></div>
+        <div class="kpi"><div class="lbl">PoC着手数</div><b>21</b><div class="delta up">▲ +6 件</div></div>
+        <div class="kpi"><div class="lbl">平均提案リードタイム</div><b>3.2 日</b><div class="delta up">▼ -0.8 日</div></div>
+        <div class="kpi"><div class="lbl">獲得 EX POINT</div><b>2,850</b><div class="delta up">▲ +320 pt</div></div>
+      </div>
+
+      <div class="two">
+        <div class="chart-card">
+          <h4>月次マッチング成立件数 <span class="legend">過去6ヶ月</span></h4>
+          <div class="bar-chart-wrap">
+            <div class="bar-chart" id="barChart"></div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h4>業界別マッチング比率 <span class="legend">直近30日</span></h4>
+          <div class="donut">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#e3ecf6" stroke-width="3.6"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#0a48b6" stroke-width="3.6" stroke-dasharray="34 100" stroke-dashoffset="0"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#13d6ff" stroke-width="3.6" stroke-dasharray="26 100" stroke-dashoffset="-34"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#5acfb1" stroke-width="3.6" stroke-dasharray="18 100" stroke-dashoffset="-60"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#f0b95a" stroke-width="3.6" stroke-dasharray="14 100" stroke-dashoffset="-78"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="#d05c8a" stroke-width="3.6" stroke-dasharray="8 100" stroke-dashoffset="-92"/>
+            </svg>
+            <div class="center"><b>386</b><small>MATCHES</small></div>
+          </div>
+          <div class="donut-legend">
+            <div><span class="sw" style="background:#0a48b6"></span>製造業 34%</div>
+            <div><span class="sw" style="background:#13d6ff"></span>観光・サービス 26%</div>
+            <div><span class="sw" style="background:#5acfb1"></span>医療・ヘルスケア 18%</div>
+            <div><span class="sw" style="background:#f0b95a"></span>教育・人材 14%</div>
+            <div><span class="sw" style="background:#d05c8a"></span>その他 8%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two" style="margin-top:16px">
+        <div class="chart-card">
+          <h4>PoC 進捗トレンド <span class="legend">週次</span></h4>
+          <svg class="line-chart" viewBox="0 0 400 200" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#13d6ff" stop-opacity=".5"/>
+                <stop offset="100%" stop-color="#0a48b6" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="#dbe6f0" stroke-width="1">
+              <line x1="0" y1="40" x2="400" y2="40"/>
+              <line x1="0" y1="80" x2="400" y2="80"/>
+              <line x1="0" y1="120" x2="400" y2="120"/>
+              <line x1="0" y1="160" x2="400" y2="160"/>
+            </g>
+            <path d="M0,150 L50,140 L100,120 L150,100 L200,90 L250,75 L300,55 L350,45 L400,30 L400,200 L0,200 Z" fill="url(#lg1)"/>
+            <path d="M0,150 L50,140 L100,120 L150,100 L200,90 L250,75 L300,55 L350,45 L400,30" fill="none" stroke="#0a73e6" stroke-width="2.5"/>
+            <g fill="#0a48b6">
+              <circle cx="0" cy="150" r="3.5"/><circle cx="50" cy="140" r="3.5"/><circle cx="100" cy="120" r="3.5"/>
+              <circle cx="150" cy="100" r="3.5"/><circle cx="200" cy="90" r="3.5"/><circle cx="250" cy="75" r="3.5"/>
+              <circle cx="300" cy="55" r="3.5"/><circle cx="350" cy="45" r="3.5"/><circle cx="400" cy="30" r="4.5" fill="#13d6ff"/>
+            </g>
+          </svg>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;font-weight:700">
+            <span>W1</span><span>W2</span><span>W3</span><span>W4</span><span>W5</span><span>W6</span><span>W7</span><span>W8</span><span>W9</span>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h4>カード活用ヒートマップ <span class="legend">過去49日</span></h4>
+          <div class="heatmap" id="heatmap"></div>
+          <div class="heatmap-legend">
+            <span>少</span>
+            <span class="lvl" style="background:rgba(13,142,247,.12)"></span>
+            <span class="lvl" style="background:rgba(13,142,247,.42)"></span>
+            <span class="lvl" style="background:rgba(13,142,247,.62)"></span>
+            <span class="lvl" style="background:rgba(13,142,247,.85)"></span>
+            <span>多</span>
+          </div>
+          <div style="margin-top:12px;font-size:12px;color:#3a4f66;line-height:1.6">
+            <b style="color:#082347">📈 インサイト：</b>火曜日と木曜日午前にマッチング率が高い傾向があります。次週は <b>火曜10時頃</b> のカード公開を推奨。
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h3 class="title">🎯 トップ成果カード</h3>
+        <div class="grid" id="topCards"></div>
+      </div>
+    </section>
+
+    <!-- ============ Premium ============ -->
+    <section id="premium" class="section">
+      <div class="section-head">
+        <div>
+          <h2>プレミアム機能 <span class="pill-tag">PREMIUM ONLY</span></h2>
+          <p class="desc">共創を加速する強力なツール群。月額 9,800円〜（年契約 20% OFF）。</p>
+        </div>
+      </div>
+      <div class="premium-grid">
+        <div class="prem-tile" onclick="openModal('🔒 クローズドルーム','特定メンバーだけが入室できる安全な共創スペース。NDA・電子署名・タイムスタンプ付き。')">
+          <div class="ico">🔒</div>
+          <h4>クローズドルーム</h4>
+          <p>特定メンバーでの安全な共創空間を作成</p>
+          <button>ルームを作成</button>
+        </div>
+        <div class="prem-tile" onclick="openModal('🛡️ IPガード','アイデア・技術情報をブロックチェーンで保護。出願前のリーク対策にも有効。')">
+          <div class="ico">🛡️</div>
+          <h4>IPガード</h4>
+          <p>アイデアや技術情報を安全に保護・管理</p>
+          <button>IPを登録</button>
+        </div>
+        <div class="prem-tile" onclick="openModal('🛒 マーケット連携','Amazon Pay / Stripe 連携でモジュール売買・決済が即時実行。')">
+          <div class="ico">🛒</div>
+          <h4>マーケット連携</h4>
+          <p>Amazon連携でモジュール売買・決済が可能</p>
+          <button>マーケットへ</button>
+        </div>
+        <div class="prem-tile" onclick="openModal('🤖 メンターアバター','AI アバターが 24時間あなたの相談に対応。録画・要約も自動化。')">
+          <div class="ico">🤖</div>
+          <h4>メンターアバター</h4>
+          <p>AIアバターが24時間あなたの相談に対応</p>
+          <button>相談する</button>
+        </div>
+        <div class="prem-tile" onclick="openModal('📝 特許出願サポート','弁理士ネットワークと連携し、出願準備から権利化までワンストップ。')">
+          <div class="ico">📝</div>
+          <h4>特許出願サポート</h4>
+          <p>出願準備から権利化までワンストップ</p>
+          <button>サポートを申請</button>
+        </div>
+        <div class="prem-tile" onclick="showTab('analytics')">
+          <div class="ico">📊</div>
+          <h4>高度分析レポート</h4>
+          <p>マッチング履歴・カード成果を多角的に可視化</p>
+          <button>分析を見る</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div>© 2026 ifLink NEXT. All Rights Reserved.</div>
+      <div class="links">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシー</a>
+        <a href="#">特定商取引法</a>
+        <a href="#">お問い合わせ</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Sound toggle -->
+<button class="sound-toggle" id="soundBtn" onclick="toggleSound()">🔇 SOUND OFF</button>
+
+<!-- FX Layer -->
+<div class="fx-layer" id="fxLayer">
+  <div class="synthesis-beam" id="beam"></div>
+  <div class="fx-text" id="fxText">⚡ IF-THEN 合成完了 ⚡</div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+  <div class="modal-card">
+    <h3 id="mTitle">タイトル</h3>
+    <p id="mBody" style="white-space:pre-wrap"></p>
+    <div class="actions">
+      <button class="primary" onclick="closeModal()">OK</button>
+      <button class="secondary" onclick="closeModal()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+<!-- API Config Modal -->
+<div class="modal" id="apiModal" onclick="if(event.target.id==='apiModal')closeApiConfig()">
+  <div class="modal-card" style="width:min(560px,92vw)">
+    <h3>🤖 AI API 設定</h3>
+    <p style="font-size:13px;color:#3a4f66;line-height:1.7">
+      OpenAI または Gemini の API キーを設定すると、共創ビルダーで実サービスによる PoC 提案を生成します。
+      キーはこのブラウザの LocalStorage にのみ保存され、外部送信されません。
+    </p>
+    <div style="display:grid;gap:12px;margin-top:14px">
+      <div>
+        <label style="font-weight:900;font-size:12.5px;color:#0a3263">プロバイダー</label>
+        <select id="apiProvider" style="width:100%;margin-top:6px;border:1px solid rgba(0,102,180,.22);border-radius:11px;background:rgba(255,255,255,.82);padding:11px 12px;font-size:13px">
+          <option value="none">使用しない（デモテンプレート出力）</option>
+          <option value="openai">OpenAI (GPT-4o-mini / GPT-4o)</option>
+          <option value="gemini">Google Gemini (1.5-flash)</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-weight:900;font-size:12.5px;color:#0a3263">API Key</label>
+        <input id="apiKey" type="password" placeholder="sk-... or AIza..." style="width:100%;margin-top:6px;border:1px solid rgba(0,102,180,.22);border-radius:11px;background:rgba(255,255,255,.82);padding:11px 12px;font-size:13px;font-family:monospace">
+      </div>
+      <div>
+        <label style="font-weight:900;font-size:12.5px;color:#0a3263">モデル名 <small style="color:#7c92a6;font-weight:700">(空欄でデフォルト)</small></label>
+        <input id="apiModel" placeholder="例: gpt-4o-mini / gemini-1.5-flash" style="width:100%;margin-top:6px;border:1px solid rgba(0,102,180,.22);border-radius:11px;background:rgba(255,255,255,.82);padding:11px 12px;font-size:13px;font-family:monospace">
+      </div>
+      <div style="font-size:11.5px;color:#7c92a6;line-height:1.6;background:rgba(255,247,220,.7);border:1px solid rgba(220,180,80,.4);padding:9px 11px;border-radius:9px">
+        ⚠️ ブラウザから直接 API を呼ぶため、CORS エラーが出るプロバイダーもあります。本番デプロイではサーバーサイド Proxy を推奨します。
+      </div>
+    </div>
+    <div class="actions">
+      <button class="primary" onclick="saveApiConfig()">💾 保存</button>
+      <button class="secondary" onclick="testApiConfig()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">🧪 接続テスト</button>
+      <button class="secondary" onclick="clearApiConfig()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">🗑️ クリア</button>
+      <button class="secondary" onclick="closeApiConfig()" style="background:linear-gradient(180deg,#fff,#cfdde9);color:#082345;border-color:rgba(255,255,255,.95)">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><div class="ico">✓</div><span id="toastText"></span></div>
+
+<script>
+/* ====================================================================
+   ifLink NEXT — Premium Edition Logic
+   ==================================================================== */
+
+/* === Image asset map (replaced by nano-banana-pro renders) === */
+const IMG = {
+  HERO: 'assets/images/hero.jpg',
+  DASHBOARD: 'assets/images/dashboard.jpg',
+  BUILDER_FX: 'assets/images/builder_fx.jpg',
+  ANALYTICS: 'assets/images/analytics.jpg',
+  MARKET_HERO: 'assets/images/market_hero.jpg',
+  COMMUNITY_HERO: 'assets/images/community_hero.jpg',
+  IF_001: 'assets/images/if-001.jpg', IF_002: 'assets/images/if-002.jpg', IF_003: 'assets/images/if-003.jpg', IF_004: 'assets/images/if-004.jpg',
+  TH_001: 'assets/images/th-001.jpg', TH_002: 'assets/images/th-002.jpg', TH_003: 'assets/images/th-003.jpg', TH_004: 'assets/images/th-004.jpg',
+  AS_001: 'assets/images/as-001.jpg', AS_002: 'assets/images/as-002.jpg', AS_003: 'assets/images/as-003.jpg', AS_004: 'assets/images/as-004.jpg',
+  MENTOR1: 'assets/images/mentor-1.jpg', MENTOR2: 'assets/images/mentor-2.jpg', MENTOR3: 'assets/images/mentor-3.jpg',
+};
+
+/* === SVG フォールバック画像（読み込み失敗時に使用） === */
+const FALLBACK_IMG = 'data:image/svg+xml;utf8,'+encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#cfdde9"/>
+        <stop offset="50%" stop-color="#9eb0bf"/>
+        <stop offset="100%" stop-color="#5d7388"/>
+      </linearGradient>
+    </defs>
+    <rect width="600" height="400" fill="url(#g)"/>
+    <circle cx="300" cy="180" r="58" fill="none" stroke="#13d6ff" stroke-width="4" opacity=".75"/>
+    <text x="300" y="195" font-family="sans-serif" font-size="42" font-weight="900" fill="#fff" text-anchor="middle" opacity=".9">if</text>
+    <text x="300" y="270" font-family="sans-serif" font-size="18" font-weight="700" fill="#fff" text-anchor="middle" opacity=".75">ifLink NEXT</text>
+  </svg>`
+);
+function imgFallback(el){ if(el.dataset.fb!=='1'){ el.dataset.fb='1'; el.src = FALLBACK_IMG; } }
+
+/* === Master Card Database === */
+const CARDS = [
+  {id:'IF-001', type:'IF',  title:'人流カウントセンサー', cat:'観光', desc:'赤外線で来場者数を高精度カウント。商業施設・観光地で実証済。', img:IMG.IF_001, vendor:'PeopleVision', views:412, like:18},
+  {id:'IF-002', type:'IF',  title:'環境モニタリングセンサー', cat:'農業', desc:'温度・CO₂・照度をリアルタイム計測し、最適環境を可視化。', img:IMG.IF_002, vendor:'EnviroTech', views:289, like:15},
+  {id:'IF-003', type:'IF',  title:'設備振動センサー', cat:'製造', desc:'IoT 振動解析で設備異常を予兆検知。保全コスト 30% 削減実績。', img:IMG.IF_003, vendor:'SmartMachine', views:520, like:24},
+  {id:'IF-004', type:'IF',  title:'AI画像解析カメラ', cat:'セキュリティ', desc:'映像から人物・物体・動きを自動認識。スマートシティ向け。', img:IMG.IF_004, vendor:'Vision AI', views:680, like:31},
+
+  {id:'TH-001', type:'THEN', title:'ロボット制御技術', cat:'製造', desc:'AI ピッキング & ハンドリング制御。少量多品種の自動化に最適。', img:IMG.TH_001, vendor:'RoboWorks', views:478, like:22},
+  {id:'TH-002', type:'THEN', title:'データ可視化ダッシュボード', cat:'IT', desc:'リアルタイムBIで意思決定を高速化。ノーコードで構築可能。', img:IMG.TH_002, vendor:'DataDesign', views:391, like:19},
+  {id:'TH-003', type:'THEN', title:'スマート農業システム', cat:'農業', desc:'データ駆動で収量最適化・労力削減。クラウド連携対応。', img:IMG.TH_003, vendor:'AgriControl', views:265, like:14},
+  {id:'TH-004', type:'THEN', title:'AIロボット検査システム', cat:'製造', desc:'AI画像 × ロボットで全数検査を自動化。24h 稼働。', img:IMG.TH_004, vendor:'AI Inspect', views:512, like:25},
+
+  {id:'AS-001', type:'ASSET', title:'バイオプラスチック素材', cat:'素材', desc:'植物由来の生分解性樹脂。脱炭素・ESG対応に最適。', img:IMG.AS_001, vendor:'BioMaterial', views:198, like:11},
+  {id:'AS-002', type:'ASSET', title:'観光ビッグデータ', cat:'観光', desc:'来訪者属性・回遊・消費行動データ群。地域DXに即活用。', img:IMG.AS_002, vendor:'Tourism Data', views:332, like:17},
+  {id:'AS-003', type:'ASSET', title:'共創ファシリテーション', cat:'スキル', desc:'認定ファシリテーターが共創ワークショップを設計・進行。', img:IMG.AS_003, vendor:'CoCreate Lab', views:154, like:9},
+  {id:'AS-004', type:'ASSET', title:'ロボティクス制御技術', cat:'製造', desc:'多軸ロボットアームの精密制御アルゴリズム。OEM 提供可。', img:IMG.AS_004, vendor:'RoboTech', views:226, like:13},
+
+  {id:'MB-001', type:'MENTOR', title:'鈴木 一郎', cat:'事業開発', desc:'Biz Innovate株式会社 代表。新規事業立案・事業開発の伴走 32年。', img:IMG.MENTOR1, vendor:'相談実績 32件', views:0, like:0, rating:4.8},
+  {id:'MB-002', type:'MENTOR', title:'田中 由美子', cat:'知財・法務', desc:'IP & Law Partners 弁護士。NDA・特許戦略・契約のスペシャリスト。', img:IMG.MENTOR2, vendor:'相談実績 28件', views:0, like:0, rating:4.9},
+  {id:'MB-003', type:'MENTOR', title:'佐藤 誠', cat:'製造・品質', desc:'Smart Factory Lab 主宰。製造業 IoT 導入・品質改善のエキスパート。', img:IMG.MENTOR3, vendor:'相談実績 41件', views:0, like:0, rating:4.7},
+];
+
+/* === Past matching DB (for builder synthesis) === */
+const PAST_MATCHES = [
+  { keyIF:'IF-001', keyTHEN:'TH-002', score:92, count:37, term:'3〜6ヶ月',
+    title:'観光×データ可視化 で街の回遊率 +28%',
+    flows:['人流データ収集','行動分析モデル構築','PoC：観光地3箇所','地域全体に展開しKPI改善']
+  },
+  { keyIF:'IF-002', keyTHEN:'TH-003', score:88, count:24, term:'4〜8ヶ月',
+    title:'環境センサー×スマート農業 で収量 +18%',
+    flows:['環境データの IoT 収集','作物別最適化モデル','ハウス2棟で実証','県内10農家へ展開']
+  },
+  { keyIF:'IF-003', keyTHEN:'TH-001', score:95, count:48, term:'2〜4ヶ月',
+    title:'振動センサー×ロボット制御 で予兆保全',
+    flows:['振動波形の特徴抽出','異常検知 AI 学習','ロボットアーム連動制御','工場ライン3本で予兆保全運用']
+  },
+  { keyIF:'IF-004', keyTHEN:'TH-004', score:90, count:33, term:'3〜5ヶ月',
+    title:'AI画像 × ロボット検査 で全数検査自動化',
+    flows:['カメラから欠陥データ収集','AI 検査モデル構築','検査ライン PoC','24h 全数自動検査の実装']
+  },
+];
+
+/* ====================================================================
+   i18n 辞書（日/英/中）
+   ==================================================================== */
+const I18N = {
+  ja: {
+    // Sidebar
+    nav_home:'HOME / 概要', nav_holder:'カードホルダー',
+    nav_register:'名刺・モジュール登録', nav_builder:'共創ビルダー',
+    nav_market:'マーケットプレイス', nav_mentor:'メンター',
+    nav_community:'共創共有', nav_analytics:'分析・レポート',
+    nav_premium:'プレミアム機能',
+    plan_free:'FREE プラン', plan_desc:'カード閲覧・登録・共創案生成までを無料で体験。プレミアムで権利保全・マーケット決済・メンター相談が解放。',
+    plan_upgrade:'プレミアムに登録',
+    // Top bar
+    search_ph:'キーワード・技術・素材・スキル・企業を検索 (例: センサー / 観光 / 法務)',
+    notify_title:'🔔 通知センター',
+    notify_body:'・新規マッチ候補が3件届きました\n・PoC「観光×IoT」が承認されました\n・メンター鈴木氏からのフィードバックが到着\n・プレミアム新機能：分析レポートβ公開',
+    bm_title:'📑 ブックマーク',
+    bm_body:'保存中: 12 カード / 4 プロジェクト / 2 メンター',
+    point_lbl:'EX POINT',
+    // Hero
+    hero_h1_a:'異業種をつなぎ、', hero_h1_em:'IF-THEN', hero_h1_b:'で未来を共創する。',
+    hero_p:'サービス・技術・素材・ノウハウ・スキルを名刺カード化。IF / THEN モジュールを組み合わせ、PoC・新規事業・マーケティング・権利保全までを一気通貫で進める 共創DX人材育成OS です。',
+    btn_demo:'▶ 30秒体験デモ', btn_open_builder:'共創ビルダーを開く', btn_view_analytics:'📊 分析を見る',
+    tag_match:'異業種マッチング', tag_poc:'PoC自動生成', tag_ip:'NDA・特許支援', tag_mentor:'メンターAI', tag_market:'マーケット連携',
+    // Stats
+    stat_cards:'登録カード', stat_proj:'共創プロジェクト',
+    stat_members:'メンバー', stat_match:'マッチング成立',
+    delta_week:'今週', delta_month:'今月',
+    // Sections
+    sec_holder_title:'カードホルダー',
+    sec_holder_desc:'IF / THEN / ASSET / MENTOR をカテゴリ・キーワードで絞り込み。クリックやドラッグ＆ドロップで共創ビルダーへ投入。',
+    sec_register_title:'名刺・モジュール登録',
+    sec_register_desc:'あなたの強みを IF / THEN / ASSET としてカード化し、共創エコシステムに投入します。',
+    sec_builder_title:'共創ビルダー',
+    sec_builder_desc:'手持ちカードから IF / THEN / ASSET / MENTOR を選び、AI が PoC 案・マッチング解を即時生成します。🔥 ドラッグ＆ドロップ対応。',
+    sec_market_title:'マーケットプレイス',
+    sec_market_desc:'優れた IF / THEN / ASSET モジュールを売買。Amazon Pay 連携で即時決済可能。',
+    sec_mentor_title:'メンターページ',
+    sec_mentor_desc:'事業開発・知財・技術・マーケティングのプロが伴走。',
+    sec_community_title:'共創共有',
+    sec_community_desc:'プロジェクトの進捗・成果を仑間と共有し、SNS にも展開できます。',
+    sec_analytics_title:'分析・レポート',
+    sec_analytics_desc:'あなたのカード運用・マッチング成果を可視化。CSV エクスポート対応。',
+    sec_premium_title:'プレミアム機能',
+    sec_premium_desc:'共創を加速する強力なツール群。月額 9,800円〜。',
+    // Builder
+    slot_if:'IFカード（きっかけ・条件）',
+    slot_then:'THENカード（結果・価値）',
+    slot_asset:'ASSETカード（技術・素材）',
+    slot_mentor:'MENTOR（伴走者）',
+    hint_if:'下の手持ちから IF カードを選択・ドロップ',
+    hint_then:'下の手持ちから THEN カードを選択・ドロップ',
+    hint_asset:'任意：補強したい資産を選択・ドロップ',
+    hint_mentor:'任意：相談したいメンターを選択・ドロップ',
+    btn_generate:'⚡ 共創アイデアを生成', btn_reset:'🔄 リセット', btn_random:'🎲 ランダム提案',
+    hand_title:'🃏 手持ちカード（クリックまたはドラッグで投入）',
+    match_title:'🌟 過去マッチングDB ヒット',
+    match_sub_default:'類似する成立済み共創ソリューションが見つかりました。',
+    match_score:'類似度', match_count:'過去成立件数', match_term:'推奨期間',
+    ai_loading:'AIが提案を生成中...',
+    // Forms
+    f_type:'カードタイプ', f_company:'提供企業 / 個人',
+    f_title:'カード名', f_cat:'業界カテゴリ',
+    f_desc:'説明', f_tags:'連携希望（タグ）',
+    f_protect:'権利保全レベル',
+    btn_register:'＋ カードを登録（+50pt）',
+    btn_scan:'📷 名刺をスキャン', btn_ai_assist:'🤖 AI支援登録',
+    // Recommend
+    recommend_title:'💡 おすすめ共創テーマ',
+    news_title:'📰 プラットフォームニュース',
+    // Misc
+    persist_loaded:'💾 保存されたデータを復元しました',
+    csv_done:'📥 CSVをエクスポートしました',
+    // All filter labels
+    f_all:'すべて', f_if:'IFカード', f_then:'THENカード', f_asset:'ASSETカード', f_mentor:'メンター',
+    api_off:'AI: OFF', api_on:'AI: ON', api_err:'AI: ERR',
+  },
+  en: {
+    nav_home:'HOME / Overview', nav_holder:'Card Holder',
+    nav_register:'Card / Module Register', nav_builder:'Co-Creation Builder',
+    nav_market:'Marketplace', nav_mentor:'Mentor',
+    nav_community:'Community', nav_analytics:'Analytics & Report',
+    nav_premium:'Premium',
+    plan_free:'FREE Plan', plan_desc:'Browse / register cards and generate ideas for free. Premium unlocks IP protection, marketplace payments, and mentor consultation.',
+    plan_upgrade:'Upgrade to Premium',
+    search_ph:'Search keywords, tech, materials, skills, companies (e.g. sensor / tourism / legal)',
+    notify_title:'🔔 Notification Center',
+    notify_body:'• 3 new match candidates arrived\n• PoC "Tourism×IoT" approved\n• Feedback from Mentor Suzuki\n• Premium new feature: Analytics Report β',
+    bm_title:'📑 Bookmarks',
+    bm_body:'Saved: 12 cards / 4 projects / 2 mentors',
+    point_lbl:'EX POINT',
+    hero_h1_a:'Connect industries with ', hero_h1_em:'IF-THEN', hero_h1_b:' to co-create the future.',
+    hero_p:'Turn services, technologies, materials, know-how, and skills into business cards. Combine IF / THEN modules to drive PoCs, new business, marketing, and rights protection — all in one Co-Creation DX OS.',
+    btn_demo:'▶ 30-sec Demo', btn_open_builder:'Open Builder', btn_view_analytics:'📊 View Analytics',
+    tag_match:'Cross-industry Match', tag_poc:'Auto PoC', tag_ip:'NDA & Patent Support', tag_mentor:'Mentor AI', tag_market:'Marketplace',
+    stat_cards:'Cards Registered', stat_proj:'Co-Creation Projects',
+    stat_members:'Members', stat_match:'Successful Matches',
+    delta_week:'this week', delta_month:'this month',
+    sec_holder_title:'Card Holder',
+    sec_holder_desc:'Filter IF / THEN / ASSET / MENTOR by category and keyword. Click or drag & drop into the Builder.',
+    sec_register_title:'Card / Module Register',
+    sec_register_desc:'Cardify your strengths as IF / THEN / ASSET and add them to the co-creation ecosystem.',
+    sec_builder_title:'Co-Creation Builder',
+    sec_builder_desc:'Pick IF / THEN / ASSET / MENTOR from your hand. AI generates PoC ideas in seconds. 🔥 Drag & drop supported.',
+    sec_market_title:'Marketplace',
+    sec_market_desc:'Trade outstanding IF / THEN / ASSET modules. Instant payment via Amazon Pay integration.',
+    sec_mentor_title:'Mentor',
+    sec_mentor_desc:'Top experts in business, IP, technology and marketing accompany your project.',
+    sec_community_title:'Community',
+    sec_community_desc:'Share project progress and outcomes with peers and broadcast to social media.',
+    sec_analytics_title:'Analytics & Report',
+    sec_analytics_desc:'Visualize your card operations and matching results. CSV export supported.',
+    sec_premium_title:'Premium',
+    sec_premium_desc:'Powerful tools that accelerate co-creation. From ¥9,800/month.',
+    slot_if:'IF Card (trigger / condition)',
+    slot_then:'THEN Card (outcome / value)',
+    slot_asset:'ASSET Card (tech / material)',
+    slot_mentor:'MENTOR (advisor)',
+    hint_if:'Pick or drop an IF card from your hand below',
+    hint_then:'Pick or drop a THEN card from your hand below',
+    hint_asset:'Optional: drop an asset to reinforce',
+    hint_mentor:'Optional: drop a mentor to consult',
+    btn_generate:'⚡ Generate Co-Creation Idea', btn_reset:'🔄 Reset', btn_random:'🎲 Random',
+    hand_title:'🃏 Hand Cards (click or drag to play)',
+    match_title:'🌟 Past Matching DB Hit',
+    match_sub_default:'A similar successful co-creation solution was found.',
+    match_score:'Similarity', match_count:'Past matches', match_term:'Recommended period',
+    ai_loading:'AI is generating proposal...',
+    f_type:'Card Type', f_company:'Provider / Person',
+    f_title:'Card Title', f_cat:'Industry Category',
+    f_desc:'Description', f_tags:'Tags',
+    f_protect:'Rights Protection',
+    btn_register:'＋ Register Card (+50pt)',
+    btn_scan:'📷 Scan Business Card', btn_ai_assist:'🤖 AI-Assisted Register',
+    recommend_title:'💡 Recommended Themes',
+    news_title:'📰 Platform News',
+    persist_loaded:'💾 Restored saved data',
+    csv_done:'📥 CSV exported',
+    f_all:'All', f_if:'IF', f_then:'THEN', f_asset:'ASSET', f_mentor:'MENTOR',
+    api_off:'AI: OFF', api_on:'AI: ON', api_err:'AI: ERR',
+  },
+  zh: {
+    nav_home:'首页 / 概述', nav_holder:'卡片夹',
+    nav_register:'名片·模块登记', nav_builder:'共创构建器',
+    nav_market:'市场', nav_mentor:'导师',
+    nav_community:'共创分享', nav_analytics:'分析报告',
+    nav_premium:'高级功能',
+    plan_free:'免费版', plan_desc:'免费体验卡片浏览·登记·共创生成。高级版解锁权利保护·市场支付·导师咨询。',
+    plan_upgrade:'升级高级版',
+    search_ph:'搜索关键字·技术·材料·技能·企业（例: 传感器 / 旅游 / 法务）',
+    notify_title:'🔔 通知中心',
+    notify_body:'• 新增3个匹配候选\n• PoC「旅游×IoT」已获批准\n• 来自铃木导师的反馈\n• 高级新功能：分析报告β上线',
+    bm_title:'📑 收藏',
+    bm_body:'已保存: 12 张卡片 / 4 个项目 / 2 位导师',
+    point_lbl:'EX 积分',
+    hero_h1_a:'跨行业连接，以', hero_h1_em:'IF-THEN', hero_h1_b:'共创未来。',
+    hero_p:'将服务·技术·材料·经验·技能名片化，组合 IF / THEN 模块，推进PoC·新业务·营销·权利保护 — 一体化共创DX人才培养OS。',
+    btn_demo:'▶ 30秒体验', btn_open_builder:'打开构建器', btn_view_analytics:'📊 查看分析',
+    tag_match:'跨行业匹配', tag_poc:'自动PoC', tag_ip:'NDA与专利支援', tag_mentor:'导师AI', tag_market:'市场集成',
+    stat_cards:'已登记卡片', stat_proj:'共创项目',
+    stat_members:'成员', stat_match:'匹配成功',
+    delta_week:'本周', delta_month:'本月',
+    sec_holder_title:'卡片夹',
+    sec_holder_desc:'按类别·关键词筛选 IF / THEN / ASSET / MENTOR。点击或拖拽送入构建器。',
+    sec_register_title:'名片·模块登记',
+    sec_register_desc:'将您的优势作为 IF / THEN / ASSET 名片化，加入共创生态。',
+    sec_builder_title:'共创构建器',
+    sec_builder_desc:'从手牌中选取 IF / THEN / ASSET / MENTOR，AI即时生成PoC提案。🔥 支持拖放。',
+    sec_market_title:'市场',
+    sec_market_desc:'交易优质 IF / THEN / ASSET 模块。支持Amazon Pay即时结算。',
+    sec_mentor_title:'导师页面',
+    sec_mentor_desc:'业务·知识产权·技术·营销领域的专家陪伴。',
+    sec_community_title:'共创分享',
+    sec_community_desc:'与伙伴分享项目进展与成果，还可一键分享到SNS。',
+    sec_analytics_title:'分析·报告',
+    sec_analytics_desc:'可视化您的卡片运营与匹配成果，支持CSV导出。',
+    sec_premium_title:'高级功能',
+    sec_premium_desc:'加速共创的强大工具。月费 ¥9,800 起。',
+    slot_if:'IF 卡（触发·条件）',
+    slot_then:'THEN 卡（结果·价值）',
+    slot_asset:'ASSET 卡（技术·材料）',
+    slot_mentor:'MENTOR（陪走者）',
+    hint_if:'从下方手牌选择或拖放 IF 卡',
+    hint_then:'从下方手牌选择或拖放 THEN 卡',
+    hint_asset:'可选：拖放资产以增强',
+    hint_mentor:'可选：拖放导师以咨询',
+    btn_generate:'⚡ 生成共创创意', btn_reset:'🔄 重置', btn_random:'🎲 随机',
+    hand_title:'🃏 手牌（点击或拖放）',
+    match_title:'🌟 历史匹配 DB 命中',
+    match_sub_default:'发现了類似的已成功共创方案。',
+    match_score:'相似度', match_count:'过往成功数', match_term:'推荐期限',
+    ai_loading:'AI 正在生成提案...',
+    f_type:'卡片类型', f_company:'提供者 / 个人',
+    f_title:'卡名', f_cat:'行业分类',
+    f_desc:'说明', f_tags:'合作标签',
+    f_protect:'权利保护级别',
+    btn_register:'＋ 登记卡片（+50pt）',
+    btn_scan:'📷 扫描名片', btn_ai_assist:'🤖 AI 辅助登记',
+    recommend_title:'💡 推荐共创主题',
+    news_title:'📰 平台动态',
+    persist_loaded:'💾 已恢复保存的数据',
+    csv_done:'📥 CSV 已导出',
+    f_all:'全部', f_if:'IF', f_then:'THEN', f_asset:'ASSET', f_mentor:'导师',
+    api_off:'AI: 关', api_on:'AI: 开', api_err:'AI: 错',
+  }
+};
+function t(key){ return (I18N[state.lang]||I18N.ja)[key] || I18N.ja[key] || key; }
+
+/* ====================================================================
+   LocalStorage 永続化レイヤー
+   ==================================================================== */
+const LS_KEY = 'iflinkNext_v2';
+function persist(){
+  try{
+    const data = {
+      lang: state.lang,
+      points: state.points,
+      slots: state.slots,
+      sound: state.sound,
+      filter: state.filter,
+      handFilter: state.handFilter,
+      customCards: state.customCards,
+      apiCfg: state.apiCfg,
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  }catch(e){ console.warn('persist failed', e); }
+}
+function restore(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    if(d.lang) state.lang = d.lang;
+    if(typeof d.points==='number') state.points = d.points;
+    if(d.slots) state.slots = Object.assign({IF:null,THEN:null,ASSET:null,MENTOR:null}, d.slots);
+    if(typeof d.sound==='boolean') state.sound = d.sound;
+    if(d.filter) state.filter = d.filter;
+    if(d.handFilter) state.handFilter = d.handFilter;
+    if(Array.isArray(d.customCards)) state.customCards = d.customCards;
+    if(d.apiCfg) state.apiCfg = d.apiCfg;
+    return true;
+  }catch(e){ console.warn('restore failed', e); return false; }
+}
+
+/* === State === */
+const state = {
+  tab:'home',
+  lang:'ja',
+  filter:'ALL',
+  handFilter:'IF',
+  slots:{IF:null, THEN:null, ASSET:null, MENTOR:null},
+  sound:false,
+  audioCtx:null,
+  points:2850,
+  customCards:[],   // ユーザー登録カード
+  apiCfg:{provider:'none', key:'', model:''},
+};
+
+/* ====================================================================
+   AI 連携（OpenAI / Gemini）
+   ==================================================================== */
+async function callAI(prompt){
+  const cfg = state.apiCfg || {};
+  if(!cfg.provider || cfg.provider==='none' || !cfg.key){
+    throw new Error('AI 未設定');
+  }
+  if(cfg.provider === 'openai'){
+    const model = cfg.model || 'gpt-4o-mini';
+    const res = await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},
+      body: JSON.stringify({
+        model,
+        messages:[
+          {role:'system', content:'You are a senior business consultant for cross-industry co-creation. Reply concisely in the language of the user prompt.'},
+          {role:'user', content:prompt}
+        ],
+        temperature:0.7, max_tokens:900
+      })
+    });
+    if(!res.ok){ const txt = await res.text(); throw new Error('OpenAI '+res.status+': '+txt.slice(0,200)); }
+    const j = await res.json();
+    return j.choices?.[0]?.message?.content || '(empty)';
+  }
+  if(cfg.provider === 'gemini'){
+    const model = cfg.model || 'gemini-1.5-flash';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(cfg.key)}`;
+    const res = await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        contents:[{parts:[{text:prompt}]}],
+        generationConfig:{ temperature:0.7, maxOutputTokens:900 }
+      })
+    });
+    if(!res.ok){ const txt = await res.text(); throw new Error('Gemini '+res.status+': '+txt.slice(0,200)); }
+    const j = await res.json();
+    return j.candidates?.[0]?.content?.parts?.[0]?.text || '(empty)';
+  }
+  throw new Error('Unknown provider');
+}
+function openApiConfig(){
+  document.getElementById('apiProvider').value = state.apiCfg.provider || 'none';
+  document.getElementById('apiKey').value = state.apiCfg.key || '';
+  document.getElementById('apiModel').value = state.apiCfg.model || '';
+  document.getElementById('apiModal').classList.add('show');
+}
+function closeApiConfig(){ document.getElementById('apiModal').classList.remove('show'); }
+function saveApiConfig(){
+  state.apiCfg = {
+    provider: document.getElementById('apiProvider').value,
+    key: document.getElementById('apiKey').value.trim(),
+    model: document.getElementById('apiModel').value.trim(),
+  };
+  persist();
+  updateApiStatus();
+  showToast('💾 API 設定を保存しました');
+  closeApiConfig();
+}
+function clearApiConfig(){
+  state.apiCfg = {provider:'none', key:'', model:''};
+  document.getElementById('apiProvider').value='none';
+  document.getElementById('apiKey').value='';
+  document.getElementById('apiModel').value='';
+  persist(); updateApiStatus();
+  showToast('🗑️ API 設定をクリアしました');
+}
+async function testApiConfig(){
+  const cur = {
+    provider: document.getElementById('apiProvider').value,
+    key: document.getElementById('apiKey').value.trim(),
+    model: document.getElementById('apiModel').value.trim(),
+  };
+  if(cur.provider==='none' || !cur.key){ showToast('⚠ プロバイダーとキーを設定してください'); return; }
+  const backup = state.apiCfg; state.apiCfg = cur;
+  const status = document.getElementById('apiStatus');
+  status.classList.remove('connected','error');
+  document.getElementById('apiStatusText').textContent = 'テスト中...';
+  try{
+    const r = await callAI('"OK" と一言だけ返してください。');
+    showToast('✅ 接続成功: '+(r||'').slice(0,40));
+    status.classList.add('connected');
+    document.getElementById('apiStatusText').textContent = t('api_on');
+  }catch(e){
+    showToast('❌ '+e.message.slice(0,80));
+    status.classList.add('error');
+    document.getElementById('apiStatusText').textContent = t('api_err');
+  } finally {
+    state.apiCfg = backup;
+  }
+}
+function updateApiStatus(){
+  const status = document.getElementById('apiStatus');
+  if(!status) return;
+  status.classList.remove('connected','error');
+  if(state.apiCfg.provider && state.apiCfg.provider!=='none' && state.apiCfg.key){
+    status.classList.add('connected');
+    document.getElementById('apiStatusText').textContent = t('api_on');
+  } else {
+    document.getElementById('apiStatusText').textContent = t('api_off');
+  }
+}
+
+/* === Tab navigation === */
+function showTab(t){
+  state.tab = t;
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active', s.id===t));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
+  if(t==='holder') renderHolder();
+  if(t==='market') renderMarket();
+  if(t==='mentor') renderMentor();
+  if(t==='community') renderCommunity();
+  if(t==='analytics') renderAnalytics();
+  if(t==='builder') renderHand();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('#nav button').forEach(b=>{
+  b.addEventListener('click',()=>showTab(b.dataset.tab));
+});
+
+/* === All cards (master + custom) === */
+function allCards(){ return [...CARDS, ...(state.customCards||[])]; }
+
+/* === Holder filters & grid === */
+function renderFilters(){
+  const el = document.getElementById('filters');
+  const FILTERS = [
+    {k:'ALL', label:t('f_all')},
+    {k:'IF', label:t('f_if')},
+    {k:'THEN', label:t('f_then')},
+    {k:'ASSET', label:t('f_asset')},
+    {k:'MENTOR', label:t('f_mentor')},
+  ];
+  el.innerHTML = FILTERS.map(f=>`<button class="${state.filter===f.k?'active':''}" data-f="${f.k}">${f.label}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{ state.filter=b.dataset.f; renderHolder(); persist(); });
+  });
+}
+function badgeClass(ty){return ty==='IF'?'badge if':ty==='THEN'?'badge then':ty==='ASSET'?'badge asset':'badge mentor'}
+function cardHTML(c, opts={}){
+  const drag = opts.draggable!==false ? 'draggable="true"' : '';
+  const onclickAttr = opts.onclick!==undefined ? opts.onclick : `pickCard('${c.id}')`;
+  return `<div class="card" data-id="${c.id}" data-type="${c.type}" ${drag} onclick="${onclickAttr}">
+    <div class="img-wrap">
+      <img src="${c.img}" alt="" loading="lazy" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+      <div class="id-tag">${c.id}</div>
+    </div>
+    <div class="body">
+      <span class="${badgeClass(c.type)}">${c.type}</span>
+      <h3>${c.title}</h3>
+      <p>${c.desc}</p>
+      <div class="meta">
+        <span>🏢 ${c.vendor}</span>
+        ${c.rating?`<span>⭐ ${c.rating}</span>`:`<span>👀 ${c.views||0} ❤ ${c.like||0}</span>`}
+      </div>
+    </div>
+  </div>`;
+}
+function renderHolder(){
+  renderFilters();
+  const q = (document.getElementById('search')?.value||'').toLowerCase();
+  const grid = document.getElementById('cardGrid');
+  const list = allCards().filter(c=>{
+    if(state.filter!=='ALL' && c.type!==state.filter) return false;
+    if(q && !(c.title.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||(c.cat||'').toLowerCase().includes(q)||(c.vendor||'').toLowerCase().includes(q))) return false;
+    return true;
+  });
+  grid.innerHTML = list.length ? list.map(c=>cardHTML(c)).join('') : `<div class="panel" style="grid-column:1/-1;text-align:center;color:var(--muted)">該当するカードがありません</div>`;
+  attachDragHandlers(grid);
+}
+
+/* === Builder: Hand === */
+function renderHandTabs(){
+  const el = document.getElementById('handTabs');
+  const tabs = [['IF',t('f_if')],['THEN',t('f_then')],['ASSET',t('f_asset')],['MENTOR',t('f_mentor')]];
+  el.innerHTML = tabs.map(([k,l])=>`<button class="${state.handFilter===k?'active':''}" data-h="${k}">${l}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{state.handFilter=b.dataset.h; renderHand(); persist();}));
+}
+function renderHand(){
+  renderHandTabs();
+  const grid = document.getElementById('handGrid');
+  const list = allCards().filter(c=>c.type===state.handFilter);
+  grid.innerHTML = list.map(c=>cardHTML(c, {onclick:`putCard('${c.id}')`})).join('');
+  renderSlots();
+  attachDragHandlers(grid);
+}
+function pickCard(id){
+  const c = allCards().find(x=>x.id===id);
+  if(!c) return;
+  const slot = c.type==='MENTOR' ? 'MENTOR' : c.type;
+  state.slots[slot] = id;
+  showTab('builder');
+  renderHand();
+  persist();
+  showToast(`${c.title} を ${slot} スロットに投入`);
+}
+function putCard(id){
+  const c = allCards().find(x=>x.id===id);
+  if(!c) return;
+  const slot = c.type==='MENTOR' ? 'MENTOR' : c.type;
+  state.slots[slot] = id;
+  renderSlots();
+  persist();
+  beep(420);
+}
+function clearSlot(ty){ state.slots[ty]=null; renderSlots(); persist(); }
+function renderSlots(){
+  ['IF','THEN','ASSET','MENTOR'].forEach(ty=>{
+    const slot = document.getElementById('slot-'+ty);
+    const hint = document.getElementById('hint-'+ty);
+    const id = state.slots[ty];
+    if(id){
+      const c = allCards().find(x=>x.id===id);
+      if(!c){ state.slots[ty]=null; return; }
+      slot.classList.add('has-card');
+      if(hint) hint.style.display='none';
+      let inner = slot.querySelector('.card');
+      if(inner) inner.remove();
+      slot.insertAdjacentHTML('beforeend', cardHTML(c, {onclick:'void(0)', draggable:false}));
+    } else {
+      slot.classList.remove('has-card');
+      if(hint) hint.style.display='block';
+      const inner = slot.querySelector('.card'); if(inner) inner.remove();
+    }
+  });
+}
+function resetBuilder(){
+  state.slots = {IF:null, THEN:null, ASSET:null, MENTOR:null};
+  renderSlots();
+  document.getElementById('result').style.display='none';
+  document.getElementById('matchStage').classList.remove('show');
+  persist();
+}
+function randomCombo(){
+  const pick = ty => {
+    const list = allCards().filter(c=>c.type===ty);
+    return list[Math.floor(Math.random()*list.length)].id;
+  };
+  state.slots = {IF:pick('IF'), THEN:pick('THEN'), ASSET:pick('ASSET'), MENTOR:pick('MENTOR')};
+  renderSlots();
+  persist();
+  showToast('🎲 ランダムでカードをセットしました');
+}
+
+/* ====================================================================
+   Drag & Drop （PC + Touch 対応）
+   ==================================================================== */
+let dragData = null;       // {id, type}
+let touchGhost = null;
+let touchActiveSlot = null;
+
+function attachDragHandlers(scope){
+  const cards = scope.querySelectorAll('.card[draggable="true"]');
+  cards.forEach(card=>{
+    // PC: HTML5 Drag API
+    card.addEventListener('dragstart', e=>{
+      const id = card.dataset.id; const ty = card.dataset.type;
+      dragData = {id, type:ty};
+      e.dataTransfer.effectAllowed = 'move';
+      try{ e.dataTransfer.setData('text/plain', id); }catch{}
+      card.classList.add('dragging');
+      highlightSlots(ty);
+    });
+    card.addEventListener('dragend', ()=>{
+      card.classList.remove('dragging');
+      clearSlotHighlight();
+      dragData = null;
+    });
+    // Touch: 手製ゴースト + スロットヒット判定
+    card.addEventListener('touchstart', e=>{
+      const id = card.dataset.id; const ty = card.dataset.type;
+      const c = allCards().find(x=>x.id===id);
+      if(!c) return;
+      dragData = {id, type:ty};
+      const t0 = e.touches[0];
+      touchGhost = document.createElement('div');
+      touchGhost.className = 'touch-ghost';
+      touchGhost.innerHTML = `<img src="${c.img}" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer"><div class="lbl">${c.title}</div>`;
+      touchGhost.style.left = t0.clientX+'px'; touchGhost.style.top = t0.clientY+'px';
+      document.body.appendChild(touchGhost);
+      highlightSlots(ty);
+    }, {passive:true});
+    card.addEventListener('touchmove', e=>{
+      if(!touchGhost) return;
+      const t0 = e.touches[0];
+      touchGhost.style.left = t0.clientX+'px'; touchGhost.style.top = t0.clientY+'px';
+      // 判定下の要素
+      const el = document.elementFromPoint(t0.clientX, t0.clientY);
+      const slot = el ? el.closest('.slot') : null;
+      if(touchActiveSlot && touchActiveSlot!==slot) touchActiveSlot.classList.remove('drag-hover');
+      if(slot && slot.classList.contains('drop-target')){
+        slot.classList.add('drag-hover');
+        touchActiveSlot = slot;
+      } else {
+        touchActiveSlot = null;
+      }
+      e.preventDefault();
+    }, {passive:false});
+    card.addEventListener('touchend', e=>{
+      if(!touchGhost) return;
+      if(touchActiveSlot && dragData){
+        const slotType = touchActiveSlot.id.replace('slot-','');
+        if(canDrop(dragData.type, slotType)){
+          state.slots[slotType] = dragData.id;
+          renderSlots(); persist(); beep(560);
+          touchActiveSlot.classList.remove('flash'); void touchActiveSlot.offsetWidth; touchActiveSlot.classList.add('flash');
+        }
+      }
+      touchGhost.remove(); touchGhost = null;
+      if(touchActiveSlot){ touchActiveSlot.classList.remove('drag-hover'); touchActiveSlot=null; }
+      clearSlotHighlight();
+      dragData = null;
+    });
+  });
+}
+
+function canDrop(cardType, slotType){
+  if(cardType==='MENTOR') return slotType==='MENTOR';
+  return cardType===slotType;
+}
+function highlightSlots(ty){
+  ['IF','THEN','ASSET','MENTOR'].forEach(s=>{
+    const slot = document.getElementById('slot-'+s);
+    if(!slot) return;
+    if(canDrop(ty, s)) slot.classList.add('drop-target');
+  });
+}
+function clearSlotHighlight(){
+  document.querySelectorAll('.slot').forEach(s=>{
+    s.classList.remove('drop-target','drag-hover');
+  });
+}
+function setupSlotDropZones(){
+  ['IF','THEN','ASSET','MENTOR'].forEach(ty=>{
+    const slot = document.getElementById('slot-'+ty);
+    if(!slot) return;
+    slot.addEventListener('dragover', e=>{
+      if(!dragData) return;
+      if(canDrop(dragData.type, ty)){
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        slot.classList.add('drag-hover');
+      }
+    });
+    slot.addEventListener('dragleave', ()=>{
+      slot.classList.remove('drag-hover');
+    });
+    slot.addEventListener('drop', e=>{
+      e.preventDefault();
+      slot.classList.remove('drag-hover');
+      if(!dragData) return;
+      if(canDrop(dragData.type, ty)){
+        state.slots[ty] = dragData.id;
+        renderSlots(); persist(); beep(560);
+        slot.classList.remove('flash'); void slot.offsetWidth; slot.classList.add('flash');
+      }
+    });
+  });
+}
+
+/* === Builder: generate (with optional AI) === */
+async function generateIdea(){
+  const ifC = allCards().find(c=>c.id===state.slots.IF);
+  const thC = allCards().find(c=>c.id===state.slots.THEN);
+  const asC = allCards().find(c=>c.id===state.slots.ASSET);
+  const mtC = allCards().find(c=>c.id===state.slots.MENTOR);
+  if(!ifC || !thC){
+    showToast('⚠ IF と THEN は必須です'); return;
+  }
+  fxBurst();
+  beep(660,.18);
+
+  const r = document.getElementById('result');
+  const aiBox = document.getElementById('aiLoading');
+  const aiOn = state.apiCfg && state.apiCfg.provider!=='none' && state.apiCfg.key;
+
+  // ベース提案をまず表示
+  const baseIdea = buildBaseIdea(ifC, thC, asC, mtC);
+  r.style.display='block';
+  r.textContent = baseIdea;
+  r.classList.add('completed');
+  setTimeout(()=>r.classList.remove('completed'),1500);
+
+  state.points += 50;
+  document.getElementById('points').textContent = state.points.toLocaleString();
+  showMatchStage(ifC.id, thC.id);
+  ['IF','THEN','ASSET','MENTOR'].forEach(ty=>{
+    if(state.slots[ty]){
+      const s = document.getElementById('slot-'+ty);
+      s.classList.remove('flash'); void s.offsetWidth; s.classList.add('flash');
+    }
+  });
+  persist();
+
+  // AI 接続中であればリッチ提案を生成
+  if(aiOn){
+    aiBox.classList.add('show');
+    document.getElementById('aiLoadingText').textContent = t('ai_loading');
+    try{
+      const langName = state.lang==='en'?'English':state.lang==='zh'?'中文':'日本語';
+      const prompt = `あなたは異業種共創のシニアコンサルタントです。以下の IF / THEN カードを組み合わせた「革新的な共創 PoC 提案」を、${langName}で ${langName==='日本語'?'500文字':'~400 words'} 以内で生成してください。見出し・箇条書きを使い、以下を含めてください：
+
+[カード]
+IF: ${ifC.title} (${ifC.vendor}) — ${ifC.desc}
+THEN: ${thC.title} (${thC.vendor}) — ${thC.desc}
+${asC?`ASSET: ${asC.title} (${asC.vendor}) — ${asC.desc}\n`:''}${mtC?`MENTOR: ${mtC.title} (${mtC.cat})\n`:''}
+
+[含める要素]
+1. キャッチーなコンセプト名
+2. 諲う課題（Why now）
+3. PoC 4 ステップ（期間付き）
+4. 期待される KPI / ROI
+5. スケール戦略とリスク
+6. 推奨会話者・企業タイプ
+
+${asC?'アセットをどう補強要素として組み込むかも明記してください。':''}`;
+      const aiText = await callAI(prompt);
+      r.textContent = baseIdea + '\n\n═══════ 🤖 AI エンハンス提案 ═══════\n\n' + aiText;
+      r.classList.add('completed');
+      setTimeout(()=>r.classList.remove('completed'),1500);
+      showToast('✨ AI 提案を追加しました');
+    }catch(e){
+      showToast('⚠ AI 提案生成エラー: '+e.message.slice(0,80));
+      r.textContent = baseIdea + '\n\n⚠️ AI 提案の生成に失敗しました: '+e.message;
+    }finally{
+      aiBox.classList.remove('show');
+    }
+  }
+}
+function buildBaseIdea(ifC, thC, asC, mtC){
+  return `【🌟 共創ソリューション提案】
+
+IF : ${ifC.title}（${ifC.vendor}）
+THEN: ${thC.title}（${thC.vendor}）
+${asC?`ASSET: ${asC.title}（${asC.vendor}）\n`:''}${mtC?`MENTOR: ${mtC.title}（${mtC.cat}）\n`:''}
+─────────────────────────
+
+▶ コンセプト
+   「${ifC.title}」で取得したデータを「${thC.title}」で価値化。
+${asC?`   さらに「${asC.title}」を組み合わせ、独自性と再現性を高めます。\n`:''}
+▶ 想定 PoC ステップ
+   1) IFモジュールの実証環境を構築（2〜4週）
+   2) THEN ロジック / モデルの統合（4〜6週）
+   3) パイロット運用 → KPI 計測（4〜8週）
+   4) 効果検証 → スケール展開判断
+
+▶ 想定効果（業界平均ベンチ比）
+   ・KPI 改善:  +18 〜 +28 %
+   ・コスト削減: -12 〜 -22 %
+   ・市場投入リードタイム: 3〜6ヶ月
+${mtC?`\n▶ 推奨メンター\n   ${mtC.title} 氏（${mtC.cat}）が伴走。`:''}
+
+✅ EX POINT +50pt 獲得しました。`;
+}
+function showMatchStage(ifId, thId){
+  const stage = document.getElementById('matchStage');
+  // find best match
+  let m = PAST_MATCHES.find(p=>p.keyIF===ifId && p.keyTHEN===thId);
+  if(!m){
+    // fallback: random selection
+    m = PAST_MATCHES[Math.floor(Math.random()*PAST_MATCHES.length)];
+  }
+  document.getElementById('matchSub').textContent = `📌 ${m.title}`;
+  document.getElementById('flow1').textContent = m.flows[0];
+  document.getElementById('flow2').textContent = m.flows[1];
+  document.getElementById('flow3').textContent = m.flows[2];
+  document.getElementById('flow4').textContent = m.flows[3];
+  document.getElementById('matchScore').textContent = m.score+'%';
+  document.getElementById('matchCount').textContent = m.count+'件';
+  document.getElementById('matchTerm').textContent = m.term;
+  stage.classList.remove('show'); void stage.offsetWidth; stage.classList.add('show');
+}
+
+/* === FX === */
+function fxBurst(){
+  const beam = document.getElementById('beam');
+  beam.classList.remove('run'); void beam.offsetWidth; beam.classList.add('run');
+  const t = document.getElementById('fxText');
+  t.classList.remove('run'); void t.offsetWidth; t.classList.add('run');
+  // particles
+  const layer = document.getElementById('fxLayer');
+  for(let i=0;i<22;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const angle = (i/22)*Math.PI*2;
+    const dist = 200 + Math.random()*200;
+    p.style.setProperty('--x', Math.cos(angle)*dist+'px');
+    p.style.setProperty('--y', Math.sin(angle)*dist+'px');
+    p.style.animationDelay = (Math.random()*.15)+'s';
+    layer.appendChild(p);
+    requestAnimationFrame(()=>p.classList.add('run'));
+    setTimeout(()=>p.remove(),1700);
+  }
+}
+
+/* === Sound === */
+function ensureAudio(){
+  if(!state.audioCtx) state.audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return state.audioCtx;
+}
+function beep(freq=440, dur=.15){
+  if(!state.sound) return;
+  try{
+    const ac = ensureAudio();
+    const o = ac.createOscillator(); const g = ac.createGain();
+    o.type='sine'; o.frequency.value=freq;
+    g.gain.value=0; g.gain.linearRampToValueAtTime(.16, ac.currentTime+.02);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime+dur);
+    o.connect(g); g.connect(ac.destination);
+    o.start(); o.stop(ac.currentTime+dur+.02);
+  }catch(e){}
+}
+function toggleSound(){
+  state.sound = !state.sound;
+  const b = document.getElementById('soundBtn');
+  b.classList.toggle('on', state.sound);
+  b.textContent = state.sound? '🔊 SOUND ON' : '🔇 SOUND OFF';
+  persist();
+  if(state.sound) beep(540,.18);
+}
+
+/* ====================================================================
+   言語切り替え ～ applyLang
+   ==================================================================== */
+function setLang(lang){
+  state.lang = lang;
+  document.documentElement.lang = lang;
+  // システム見見出し・ラベルを更新
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.dataset.i18n;
+    el.textContent = t(k);
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    el.placeholder = t(el.dataset.i18nPh);
+  });
+  // Lang switch active
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===lang);
+  });
+  // Re-render dynamic content
+  if(state.tab==='holder') renderHolder();
+  if(state.tab==='builder') renderHand();
+  updateApiStatus();
+  persist();
+}
+
+/* === Modal === */
+function openModal(t,b){ document.getElementById('mTitle').textContent=t; document.getElementById('mBody').textContent=b; document.getElementById('modal').classList.add('show'); }
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+
+/* === Toast === */
+let toastTimer=null;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  t.classList.add('show');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* === Register (永続化されるカード作成) === */
+function registerCard(){
+  const ty = document.getElementById('regType').value;
+  const title = document.getElementById('regTitle').value.trim();
+  if(!title){ showToast('⚠ カード名を入力してください'); return; }
+  const company = document.getElementById('regCompany').value.trim() || '未記入';
+  const desc = document.getElementById('regDesc').value.trim() || 'ユーザー登録カード。';
+  const cat = document.getElementById('regCategory').value;
+  // カテゴリごとにデフォルト画像を割り当て
+  const defaults = { IF:IMG.IF_002, THEN:IMG.TH_002, ASSET:IMG.AS_001 };
+  const prefix = ty==='IF'?'UIF':ty==='THEN'?'UTH':'UAS';
+  const seq = (state.customCards.filter(c=>c.type===ty).length+1).toString().padStart(3,'0');
+  const card = {
+    id: `${prefix}-${seq}`,
+    type: ty, title, vendor: company, cat, desc,
+    img: defaults[ty] || IMG.AS_001,
+    views:0, like:0, custom:true
+  };
+  state.customCards.push(card);
+  state.points += 50;
+  document.getElementById('points').textContent = state.points.toLocaleString();
+  persist();
+  if(state.tab==='holder') renderHolder();
+  if(state.tab==='builder') renderHand();
+  showToast(`✓ ${ty}カード「${title}」を登録・保存 (+50pt)`);
+  ['regTitle','regCompany','regDesc','regTags'].forEach(id=>{const e=document.getElementById(id); if(e) e.value='';});
+}
+
+/* === Demo === */
+function startDemo(){
+  showTab('builder');
+  setTimeout(()=>{
+    state.slots = {IF:'IF-001', THEN:'TH-002', ASSET:'AS-002', MENTOR:'MB-001'};
+    renderHand();
+    showToast('💡 デモ用カードをセット。生成ボタンをクリック！');
+    setTimeout(()=>generateIdea(), 800);
+  }, 400);
+}
+
+/* === Recommend list === */
+function renderRecommend(){
+  const items = [
+    ['IF-001','TH-002','観光×可視化', '街の回遊率を+28%にする実証パターン'],
+    ['IF-003','TH-001','製造×ロボット', '振動データで予兆保全→保全コスト-30%'],
+    ['IF-002','TH-003','農業×IoT', '収量+18%の環境最適化モデル'],
+    ['IF-004','TH-004','検査×AI画像', '全数検査の24h自動化'],
+  ];
+  const el = document.getElementById('recommendList');
+  el.innerHTML = items.map(([a,b,t,d])=>`
+    <div onclick="state.slots.IF='${a}';state.slots.THEN='${b}';showTab('builder');setTimeout(()=>generateIdea(),300)" style="cursor:pointer">
+      <span class="dot"></span>
+      <div><b>${t}</b><br><small>${d}</small></div>
+    </div>`).join('');
+}
+
+/* === Market === */
+function renderMarket(){
+  const grid = document.getElementById('marketGrid');
+  const list = CARDS.filter(c=>['IF','THEN','ASSET'].includes(c.type)).map(c=>{
+    const price = (Math.floor(20+Math.random()*180)*1000);
+    return {...c, price};
+  });
+  grid.innerHTML = list.map(c=>`
+    <div class="card" onclick="openModal('🛒 ${c.title}','¥ ${c.price.toLocaleString()}\\n${c.desc}\\n\\n提供: ${c.vendor}\\n評価: ★ 4.${Math.floor(Math.random()*5)+3}\\n\\nAmazon Pay / Stripe で即時決済可能（プレミアム）。')">
+      <div class="img-wrap"><img src="${c.img}" alt=""><div class="id-tag">${c.id}</div></div>
+      <div class="body">
+        <span class="${badgeClass(c.type)}">${c.type}</span>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div class="meta"><span>💰 ¥ ${c.price.toLocaleString()}</span><span>⭐ 4.${Math.floor(Math.random()*5)+3}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+/* === Mentor === */
+function renderMentor(){
+  const grid = document.getElementById('mentorGrid');
+  const list = CARDS.filter(c=>c.type==='MENTOR');
+  grid.innerHTML = list.map(c=>`
+    <div class="card" onclick="state.slots.MENTOR='${c.id}';showTab('builder');showToast('${c.title} 氏を MENTOR にセット')">
+      <div class="img-wrap"><img src="${c.img}" alt=""><div class="id-tag">${c.id}</div></div>
+      <div class="body">
+        <span class="badge mentor">MENTOR</span>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div class="meta"><span>📋 ${c.vendor}</span><span>⭐ ${c.rating}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+/* === Community / Share === */
+const PROJECTS = [
+  {
+    title:'観光ビッグデータ × 人流センサー で街DX',
+    img: IMG.AS_002, owner:'小林 真理子', cat:'観光',
+    score:[92,85,78,88], tags:['観光DX','人流','可視化'],
+    comments:[
+      ['田中 由美子','法務面の整理は IPガード で対応可能ですよ'],
+      ['鈴木 一郎','地域 DMO との連携が次の鍵になりそうです'],
+    ]
+  },
+  {
+    title:'振動センサー × ロボット制御 予兆保全',
+    img: IMG.IF_003, owner:'佐藤 誠', cat:'製造',
+    score:[95,90,82,91], tags:['予兆保全','IoT','製造'],
+    comments:[
+      ['山田 太郎','弊社の工場でも実証希望です！'],
+    ]
+  },
+];
+function renderCommunity(){
+  const el = document.getElementById('shareList');
+  el.innerHTML = PROJECTS.map((p,i)=>`
+    <div>
+      <div class="share-card">
+        <div class="project-head">
+          <img src="${p.img}" alt="" onerror="imgFallback(this)" referrerpolicy="no-referrer">
+          <div style="flex:1">
+            <p class="project-title">${p.title}</p>
+            <div class="project-meta">投稿: ${p.owner} ／ カテゴリ: ${p.cat}</div>
+            <div class="pill-row">${p.tags.map(t=>`<span class="pill">#${t}</span>`).join('')}</div>
+          </div>
+        </div>
+        <div class="score">
+          <div><b>${p.score[0]}</b><small>新規性</small></div>
+          <div><b>${p.score[1]}</b><small>実現性</small></div>
+          <div><b>${p.score[2]}</b><small>市場性</small></div>
+          <div><b>${p.score[3]}</b><small>共創度</small></div>
+        </div>
+        <div class="comment-box">
+          <input id="cmt-${i}" placeholder="この共創にコメント..." onkeydown="if(event.key==='Enter')postComment(${i})">
+          <button onclick="postComment(${i})">送信</button>
+        </div>
+        <div class="comments" id="cmts-${i}">
+          ${p.comments.map(c=>`<div><b>${c[0]}：</b>${c[1]}</div>`).join('')}
+        </div>
+        <div class="share-actions">
+          <button onclick="shareTo('X',${i})">𝕏 で共有</button>
+          <button onclick="shareTo('FB',${i})">Facebook</button>
+          <button onclick="shareTo('LinkedIn',${i})">LinkedIn</button>
+          <button onclick="shareTo('Slack',${i})">Slack</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="share-card">
+        <h3 style="margin:0 0 8px;font-size:14px;color:#082347">📤 SNSプレビュー</h3>
+        <div class="sns-preview">🚀 共創プロジェクト『${p.title}』をifLink NEXTで進行中！
+
+#共創DX #IFTHEN #ifLinkNEXT
+${p.tags.map(t=>'#'+t).join(' ')}
+
+→ プロジェクトを見る: https://iflink.next/p/${i+1}</div>
+        <div style="margin-top:14px">
+          <h4 style="margin:0 0 8px;font-size:13px;color:#082347">🗓 進捗タイムライン</h4>
+          <div class="timeline">
+            <div class="step"><span class="num">1</span><div><b>IF / THEN マッチ成立</b><span>2026.03.10 — AIによる自動マッチング成立</span></div></div>
+            <div class="step"><span class="num">2</span><div><b>NDA 締結</b><span>2026.03.18 — クローズドルーム開設</span></div></div>
+            <div class="step"><span class="num">3</span><div><b>PoC 開始</b><span>2026.04.02 — 実証環境セットアップ</span></div></div>
+            <div class="step"><span class="num">4</span><div><b>中間レビュー</b><span>2026.04.25 — KPI 達成率 78%</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function postComment(i){
+  const inp = document.getElementById('cmt-'+i);
+  if(!inp.value.trim()) return;
+  const cm = document.getElementById('cmts-'+i);
+  const div = document.createElement('div');
+  div.innerHTML = `<b>山田 太郎：</b>${inp.value}`;
+  cm.appendChild(div);
+  inp.value='';
+  state.points += 10;
+  document.getElementById('points').textContent = state.points.toLocaleString();
+  showToast('💬 コメントを投稿しました (+10pt)');
+}
+function shareTo(net, i){
+  showToast(`📤 ${net} に共有しました (+5pt)`);
+  state.points += 5;
+  document.getElementById('points').textContent = state.points.toLocaleString();
+}
+
+/* === Analytics === */
+function renderAnalytics(){
+  // Bar chart
+  const bars = [
+    {l:'11月', v:42}, {l:'12月', v:54}, {l:'1月', v:48},
+    {l:'2月', v:61}, {l:'3月', v:72}, {l:'4月', v:89},
+  ];
+  const max = Math.max(...bars.map(b=>b.v));
+  const bc = document.getElementById('barChart');
+  bc.innerHTML = bars.map(b=>`<div class="bar" style="height:0" data-val="${b.v}" data-lbl="${b.l}"></div>`).join('');
+  setTimeout(()=>{
+    bc.querySelectorAll('.bar').forEach((el,i)=>{
+      el.style.height = ((bars[i].v/max)*100)+'%';
+    });
+  }, 80);
+  // Heatmap
+  const hm = document.getElementById('heatmap');
+  let html = '';
+  for(let i=0;i<49;i++){
+    const lvl = Math.floor(Math.random()*5);
+    html += `<div class="cell ${lvl?'l'+lvl:''}" title="${lvl} matches"></div>`;
+  }
+  hm.innerHTML = html;
+  // Top cards
+  const top = [...CARDS].filter(c=>c.type!=='MENTOR').sort((a,b)=>b.views-a.views).slice(0,4);
+  document.getElementById('topCards').innerHTML = top.map(c=>cardHTML(c, {onclick:`pickCard('${c.id}')`})).join('');
+}
+
+/* === Init === */
+window.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModal(); closeApiConfig(); } });
+document.addEventListener('DOMContentLoaded', ()=>{
+  // データ復元
+  const restored = restore();
+
+  // 言語適用
+  setLang(state.lang || 'ja');
+
+  // 言語スイッチ
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.addEventListener('click',()=>{ setLang(b.dataset.lang); showToast('🌐 '+b.dataset.lang.toUpperCase()); });
+  });
+
+  // EX POINT 表示更新
+  document.getElementById('points').textContent = state.points.toLocaleString();
+
+  // API ステータス
+  updateApiStatus();
+
+  // Render
+  renderHolder();
+  renderHand();
+  renderRecommend();
+
+  // ドロップゾーン初期化
+  setupSlotDropZones();
+
+  // 復元通知
+  if(restored){
+    setTimeout(()=>showToast(t('persist_loaded')), 500);
+  }
+});
+
+// EX POINT 表示更新フックを追加
+const _origGenerate = generateIdea;
+window.addEventListener('beforeunload', ()=>persist());
+</script>
+</body>
+</html>
